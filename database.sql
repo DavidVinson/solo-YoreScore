@@ -12,10 +12,10 @@ CREATE TABLE "user" (
 CREATE TABLE "round" (
 	"id" serial NOT NULL,
 	"game_id" integer NOT NULL,
-	"hole_number" integer NOT NULL,
-	"bingo" varchar(80) NOT NULL DEFAULT 'bingo pt',
-	"bango" varchar(80) NOT NULL DEFAULT 'bango pt',
-	"bongo" varchar(80) NOT NULL DEFAULT 'bongo pt',
+	"hole_number" integer,
+	"bingo" varchar(80),
+	"bango" varchar(80),
+	"bongo" varchar(80),
 	"start_time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	"end_time" TIMESTAMP,
 	CONSTRAINT "round_pk" PRIMARY KEY ("id")
