@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+//react bootstrap 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   HashRouter as Router,
   Route,
@@ -20,6 +22,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RulesPage from '../RulesPage/RulesPage.jsx';
+import GamePage from '../GamePage/GamePage.jsx';
 
 import './App.css';
 
@@ -102,7 +105,22 @@ function App() {
           >
             <LandingPage />
           </ProtectedRoute>
+
+          {/* <ProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to "/user"
+            // - else shows GamePage at "/gamePage"
+            exact
+            path="/gamePage"
+            authRedirect="/user"
+          >
+            <GamePage />
+          </ProtectedRoute> */}
           
+          <Route path="/gamePage">
+            <GamePage />
+          </Route>
+
           <Route path="/rules">
             <RulesPage />
           </Route>
