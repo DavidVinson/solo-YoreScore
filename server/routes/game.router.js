@@ -115,7 +115,7 @@ router.post('/start', rejectUnauthenticated, (req, res) => {
     // FIRST QUERY MAKES GAME
     pool.query(insertGameQuery,
          [req.user.id, req.body.course, req.body.wager, req.body.isFrontNine,
-        req.user.username, req.body.player2, req.body.player3, req.body.player4])
+        req.body.player1, req.body.player2, req.body.player3, req.body.player4])
         .then(result => {
             console.log('New Game Id:', result.rows[0].id); //ID IS HERE!
 
