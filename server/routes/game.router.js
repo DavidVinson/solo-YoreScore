@@ -106,12 +106,16 @@ router.post('/start', rejectUnauthenticated, (req, res) => {
     // RETURNING "id" will give us back the id of the created game
     // user_id, course, wager, isFrontNine
     const insertGameQuery = `
-    INSERT INTO "game" ("user_id", "course", "wager", "isFrontNine")
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO "game" 
+    ("user_id", "course", "wager", "isFrontNine",
+     "player1", "player2", "player3", "player4")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING "id", "isFrontNine";`
 
     // FIRST QUERY MAKES GAME
-    pool.query(insertGameQuery, [req.user.id, req.body.course, req.body.wager, req.body.isFrontNine])
+    pool.query(insertGameQuery,
+         [req.user.id, req.body.course, req.body.wager, req.body.isFrontNine,
+        req.user.username, req.body.player2, req.body.player3, req.body.player4])
         .then(result => {
             console.log('New Game Id:', result.rows[0].id); //ID IS HERE!
 
