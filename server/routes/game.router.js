@@ -4,8 +4,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 function cleanUp(arr) {
-
+    let points = [];
     let res = {};
+
     arr.forEach(function(v) {
         res[v.bingo] = (res[v.bingo] || 0) + 1;
     })
@@ -17,8 +18,10 @@ function cleanUp(arr) {
     arr.forEach(function(v) {
         res[v.bongo] = (res[v.bongo] || 0) + 1;
     })
-
-    console.log(res);
+    points.push(res);
+    // console.log(res);
+    console.log(points);
+    return points;
 
 }
 
@@ -53,6 +56,7 @@ router.get('/point/:id', rejectUnauthenticated, (req, res) => {
     //need user id
     //game id is provided by params
     //this gets the current game in the db by auth user
+    //and return sum of player points through current hole.
     const sqlText = `
     SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "game"."wager",
     "round"."id" AS "round_id", "round"."game_id", "round"."hole_number",
@@ -62,9 +66,10 @@ router.get('/point/:id', rejectUnauthenticated, (req, res) => {
     JOIN "user" ON ("game"."user_id" = "user"."id")
     WHERE "user"."id" = $1 AND "game_id" = $2;`;
     pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
-        let gamePoints = response.rows;
-        let gameData = cleanUp(gamePoints);
+        // let gamePoints = response.rows;
+        // let gameData = cleanUp(gamePoints);
         // console.log(gameData);
+        // res.send(gameData);
         res.send(response.rows);
         // res.sendStatus(200);
     }).catch((error) => {
