@@ -36,7 +36,9 @@ router.get('/point/:id', rejectUnauthenticated, (req, res) => {
     //game id is provided by params
     //this gets the current game in the db by auth user
     const sqlText = `
-    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "round"."id" AS "round_id", "round"."game_id", "round"."hole_number", "round"."bingo", "round"."bango", "round"."bongo" 
+    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "game"."wager",
+    "round"."id" AS "round_id", "round"."game_id", "round"."hole_number",
+    "round"."bingo", "round"."bango", "round"."bongo" 
     FROM "round"
     JOIN "game" ON ("round"."game_id" = "game"."id")
     JOIN "user" ON ("game"."user_id" = "user"."id")
