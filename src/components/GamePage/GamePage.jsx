@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form';
+import { useHistory } from 'react-router-dom';
 
 function GamePage() {
     const player1 = useSelector(store => store.user.username);
+    const history = useHistory();
 
     // console.log('player 1 should be', player1);
     const [course, setCourse] = useState('');
     const [wager, setWager] = useState(0);
     const [isFrontNine, setIsFrontNine] = useState(true);
-    const [player2, setPlayer2] = useState('');
-    const [player3, setPlayer3] = useState('');
-    const [player4, setPlayer4] = useState('');
+    const [player2, setPlayer2] = useState('player2');
+    const [player3, setPlayer3] = useState('player3');
+    const [player4, setPlayer4] = useState('player4');
 
     // if (!isFrontNine) {
     //     console.log('playing the back nine')
@@ -39,17 +41,23 @@ function GamePage() {
                 player4: player4
             },
         });
+
+        //reset fields
+        setCourse('');
+        setWager(0);
+        setIsFrontNine(true);
+        setPlayer2('player2');
+        setPlayer3('player3');
+        setPlayer4('player4');
+
+        //send user to round page begin
+        history.push('/roundPage');
     }
 
 
     return (
         <form className="formPanel" onSubmit={startGame}>
             <h2>New Game</h2>
-            {/* {errors.loginMessage && (
-                <h3 className="alert" role="alert">
-                {errors.loginMessage}
-                </h3>
-                )} */}
             <div>
                 <label htmlFor="course">
                     Course:
@@ -85,7 +93,7 @@ function GamePage() {
                         id="radio1"
                         value={isFrontNine}
                         onChange={() => setIsFrontNine(true)}
-                        defaultChecked />
+                     />
 
                     <Form.Check
                         type="radio"

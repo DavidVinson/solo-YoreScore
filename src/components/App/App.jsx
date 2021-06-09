@@ -23,6 +23,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RulesPage from '../RulesPage/RulesPage.jsx';
 import GamePage from '../GamePage/GamePage.jsx';
+import RoundPage from '../RoundPage/RoundPage.jsx';
 
 import './App.css';
 
@@ -119,6 +120,10 @@ function App() {
           
           <Route path="/gamePage">
             <GamePage />
+          </Route>
+
+          <Route path="/roundPage">
+            <RoundPage />
           </Route>
 
           <Route path="/rules">
