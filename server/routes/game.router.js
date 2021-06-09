@@ -3,6 +3,24 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const router = express.Router();
 
+function cleanUp(arr) {
+
+    let res = {};
+    arr.forEach(function(v) {
+        res[v.bingo] = (res[v.bingo] || 0) + 1;
+    })
+
+    arr.forEach(function(v) {
+        res[v.bango] = (res[v.bango] || 0) + 1;
+    })
+
+    arr.forEach(function(v) {
+        res[v.bongo] = (res[v.bongo] || 0) + 1;
+    })
+
+    console.log(res);
+
+}
 
 router.get('/all', rejectUnauthenticated, (req, res) => {
     // GET route: may be a admin endpoint. currently, any authenticated user
@@ -44,7 +62,11 @@ router.get('/point/:id', rejectUnauthenticated, (req, res) => {
     JOIN "user" ON ("game"."user_id" = "user"."id")
     WHERE "user"."id" = $1 AND "game_id" = $2;`;
     pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
+        let gamePoints = response.rows;
+        let gameData = cleanUp(gamePoints);
+        // console.log(gameData);
         res.send(response.rows);
+        // res.sendStatus(200);
     }).catch((error) => {
         console.log('GET req problems on server', error);
         res.sendStatus(500);
