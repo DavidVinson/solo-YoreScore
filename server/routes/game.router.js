@@ -29,35 +29,39 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-// PUT route code here
-router.put('/:id', rejectUnauthenticated, (req, res) => {
-    
-    console.log('update game table at id', req.params.id);
-    console.log('the user is', req.user.id);
+//GET points for the game
+router.get('/point/:id', rejectUnauthenticated, (req, res) => {
+    // GET route code here
+    //need user id
+    //game id is provided by params
+    //this gets the current game in the db by auth user
     const sqlText = `
-    UPDATE "game" 
-    SET "current_round" = "current_round" + 1
-    WHERE "id" = $1 AND "user_id" = $2`;
-    pool.query(sqlText, [req.params.id, req.user.id,])
-        .then((response) => {
-            res.sendStatus(201);
-        }).catch((error) => {
-            console.log('PUT req problems on server', error);
-            res.sendStatus(500);
-        })
+    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "round"."id" AS "round_id", "round"."game_id", "round"."hole_number", "round"."bingo", "round"."bango", "round"."bongo" 
+    FROM "round"
+    JOIN "game" ON ("round"."game_id" = "game"."id")
+    JOIN "user" ON ("game"."user_id" = "user"."id")
+    WHERE "user"."id" = $1 AND "game_id" = $2;`;
+    pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
+        res.send(response.rows);
+    }).catch((error) => {
+        console.log('GET req problems on server', error);
+        res.sendStatus(500);
+    })
 });
+
 
 // PUT route to update game
 router.put('/', rejectUnauthenticated, (req, res) => {
     //update the game round and increment the current_round in the game
-    //need: game table id
-    console.log('update players at id', req.body.id);
+    //need: game id, user id
+    console.log('next round', req.body);
     console.log('the user is', req.user.id);
+
     const sqlText = `
     UPDATE "game" 
     SET "current_round" = "current_round" + 1
     WHERE "id" = $1 AND "user_id" = $2`;
-    pool.query(sqlText, [req.params.id, req.user.id])
+    pool.query(sqlText, [req.body.game_id, req.user.id])
         .then((response) => {
             res.sendStatus(201);
         }).catch((error) => {
@@ -68,7 +72,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 
 //POST to both game and round tables
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/start', rejectUnauthenticated, (req, res) => {
     console.log(req.body);
     // RETURNING "id" will give us back the id of the created game
     // user_id, course, wager, isFrontNine
@@ -97,9 +101,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             }
             const insertGameRoundQuery = `
 
-        INSERT INTO "round" ("game_id", "hole_number")
-        VALUES  ($1, $2);
-        `
+            INSERT INTO "round" ("game_id", "hole_number")
+            VALUES  ($1, $2);
+            `
             // SECOND QUERY ADDS ROUND FOR THAT NEW GAME
             pool.query(insertGameRoundQuery, [createdGameId, hole_number]).then(result => {
                 //Now that both are done, send back success!
@@ -116,6 +120,47 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500)
         })
 })
+
+
+// PUT route to end the game
+router.put('/end', rejectUnauthenticated, (req, res) => {
+    //end the game
+    //need: game id, user id
+    console.log('end game', req.body);
+    console.log('the user is', req.user.id);
+
+    const sqlText = `
+    UPDATE "game" 
+    SET "game_status" = 2, "end_time" = NOW()
+    WHERE "id" = $1 AND "user_id" = $2`;
+    pool.query(sqlText, [req.body.game_id, req.user.id])
+        .then((response) => {
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log('PUT req problems on server', error);
+            res.sendStatus(500);
+        })
+});
+
+// DELETE route code here
+router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
+    //update the game round and increment the current_round in the game
+    //need: game id, user id
+
+    console.log('delete game', req.params.id);
+    console.log('the user is', req.user.id);
+
+    const sqlText = `
+    DELETE FROM "game" 
+    WHERE "id" = $1 AND "user_id" = $2`;
+    pool.query(sqlText, [req.params.id, req.user.id,])
+        .then((response) => {
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log('DELETE req problems on server', error);
+            res.sendStatus(500);
+        })
+});
 
 
 module.exports = router;
