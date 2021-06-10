@@ -24,7 +24,9 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import RulesPage from '../RulesPage/RulesPage.jsx';
 import GamePage from '../GamePage/GamePage.jsx';
 import RoundPage from '../RoundPage/RoundPage.jsx';
-
+import BingoPage from '../BingoPage/BingoPage.jsx';
+import BangoPage from '../BangoPage/BangoPage.jsx';
+import BongoPage from '../BongoPage/BongoPage.jsx';
 import './App.css';
 
 function App() {
@@ -124,6 +126,18 @@ function App() {
 
           <Route path="/roundPage">
             <RoundPage />
+          </Route>
+
+          <Route path="/bingo">
+            <BingoPage />
+          </Route>
+
+          <Route path="/bango">
+            <BangoPage />
+          </Route>
+
+          <Route path="/bongo">
+            <BongoPage />
           </Route>
 
           <Route path="/rules">

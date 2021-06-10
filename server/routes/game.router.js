@@ -41,7 +41,23 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
     //this gets all the games in the db by auth user who started the game
-    const sqlText = `SELECT * FROM "game" WHERE user_id = $1;`;
+    const sqlText = `SELECT * FROM "game" WHERE "user_id" = $1;`;
+    pool.query(sqlText, [req.user.id]).then((response) => {
+        res.send(response.rows);
+    }).catch((error) => {
+        console.log('GET req problems on server', error);
+        res.sendStatus(500);
+    })
+});
+
+router.get('/current', rejectUnauthenticated, (req, res) => {
+    // GET route code here
+    //this gets all the games in the db by auth user who started the game
+    const sqlText = `
+    SELECT * 
+    FROM "game"
+    JOIN "round" ON ("game"."id" = "round"."game_id")
+    WHERE "user_id" = $1 AND "game"."game_status" = 1;`;
     pool.query(sqlText, [req.user.id]).then((response) => {
         res.send(response.rows);
     }).catch((error) => {

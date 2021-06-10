@@ -14,6 +14,8 @@ function UserPage() {
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />
       <button onClick={() => history.push('/gamePage')}>Start Game</button>
+      <button onClick={() => history.push('/roundPage')}>Current Game</button>
+
     </div>
   );
 }

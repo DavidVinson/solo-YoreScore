@@ -10,10 +10,21 @@ function* startGame(action) {
       console.log('Start Game post request failed', error);
     }
   }
+
+  function* fetchGame() {
+    try {
+      const response = yield axios.get('/api/game/current');
+      yield put({ type: 'SET_CURRENT_GAME', payload: response.data });
+
+    } catch (error) {
+      console.log('Get current game request failed', error);
+    }
+  }
   
 
   function* gameSaga() {
     yield takeLatest('START_GAME', startGame);
+    yield takeLatest('FETCH_CURRENT_GAME', fetchGame);
   }
   
 
