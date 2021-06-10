@@ -7,9 +7,6 @@ import {useHistory} from 'react-router-dom';
 function BangoPage(props) {
 
     const game = useSelector((store) => store.game);
-    // const {point} = useParams();
-    // console.log('point', point);
-    // const dispatch = useDispatch();
     const [heading, setHeading] = useState('Bango Page');
     // setHeading(`${point} Point Assign page`);
 
@@ -19,14 +16,20 @@ function BangoPage(props) {
     // console.log(game[0].player3);
     // console.log(game[0].player4);
 
-    // const [bango, setBango] = useState('');
     const history = useHistory();
+    const dispatch = useDispatch();
 
     function alertClicked(player) {
         alert(`You clicked ${player}`);
-        // setBango(player);
 
         console.log(`${player} awarded Bango!`);
+
+        dispatch({
+            type: 'ASSIGN_POINT',
+            payload: {
+                bango: player
+            }
+        })
 
         history.push('/roundPage');
 

@@ -5,49 +5,69 @@ import {useHistory} from 'react-router-dom';
 function RoundPage(props) {
 
   const currentGame = useSelector((store) => store.game);
-  const [heading, setHeading] = useState('Round Page Component');
+  // const currentHole = currentGame[0].hole_number;
+  const points = useSelector((store) => store.point);
 
-  // const [bingo, setBingo] = useState('bingo');
-  // const [bango, setBango] = useState('bango');
-  // const [bongo, setBongo] = useState('bongo');
-
+  const [heading, setHeading] = useState(`Hole ??`);
+  const [bingoPoint, setBingoPoint] = useState('');
+  const [bangoPoint, setBangoPoint] = useState('');
+  const [bongoPoint, setBongoPoint] = useState('');
+ 
   const dispatch = useDispatch();
   const history = useHistory();
 
   console.log('current game store', currentGame);
+  console.log('current points in store', points);
 
-
-  useEffect(() => {
-    dispatch({
-      type: 'FETCH_CURRENT_GAME'
-    })
-  }, [])
 
   function assignBingo() {
-    // navigate to PointAssignPage
+    // navigate to BingoPage
     history.push('/bingo');
   }
 
   function assignBango() {
-    // navigate to PointAssignPage
+    // navigate to BangoPage
     history.push('/bango');
   }
 
   function assignBongo() {
-    // navigate to PointAssignPage
+    // navigate to BongoPage
     history.push('/bongo');
-
   }
 
-  return (
-    <div>
-      <h2>{heading}</h2>
-      <h2 onClick={assignBingo}>Bingo!</h2>
-      <h2 onClick={assignBango}>Bango!</h2>
-      <h2 onClick={assignBongo}>Bongo!</h2>
-
-    </div>
-  );
+  function nextHole() {
+    console.log('next hole');
+    //dispatch points to db
+    //dispatch game to next round
+    //reset points store to empty
+    //reset round page
+    //
+    
+  }
+  
+  if (!points) {
+    return (
+      <div>
+        <h2>{heading}</h2>
+        <h2 onClick={assignBingo}>Bingo!</h2>
+        <h2 onClick={assignBango}>Bango!</h2>
+        <h2 onClick={assignBongo}>Bongo!</h2>  
+      </div>
+    );
+  }
+  else {
+    return (
+      <div>
+        <h2>{heading}</h2>
+        {points ? <h2 onClick={assignBingo}>Bingo!</h2> : <h2>Bingo! {bingoPoint}</h2>}
+        {points ? <h2 onClick={assignBango}>Bango!</h2> : <h2>Bango! {bangoPoint}</h2>}
+        {points ? <h2 onClick={assignBongo}>Bongo!</h2> : <h2>Bongo! {bongoPoint}</h2>}
+        {points.length === 3 && <button>Next Hole</button>}
+  
+      </div>
+    );
+  
+  }
 }
 
 export default RoundPage;
