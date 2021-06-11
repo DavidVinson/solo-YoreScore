@@ -8,7 +8,6 @@ function BingoPage(props) {
 
     const game = useSelector((store) => store.game);
     const [heading, setHeading] = useState('Bingo Page');
-    // setHeading(`${point} Point Assign page`);
 
     // console.log(game);
     // console.log(game[0].player1);

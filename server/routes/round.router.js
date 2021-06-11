@@ -76,10 +76,15 @@ router.post('/', (req, res) => {
 
     const sqlText = `
         INSERT INTO "round" ("game_id", "hole_number")
-        VALUES  ($1, $2);
+        VALUES  ($1, $2)
+        RETURNING "id";
         `
     pool.query(sqlText, [req.body.game_id, next_hole]).then((result) => {
         // console.log('Next hole', result);
+        // console.log('result rows', result.rows);
+        //result.rows is an arrary of obj.
+        console.log('New Round Id:', result.rows[0]); //ID IS HERE!
+        // const newRound = result.rows[0];
         res.sendStatus(201);
     }).catch((error) => {
         console.log('Round table post error', error);

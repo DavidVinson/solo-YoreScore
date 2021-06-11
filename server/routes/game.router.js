@@ -40,8 +40,13 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
-    //this gets all the games in the db by auth user who started the game
-    const sqlText = `SELECT * FROM "game" WHERE "user_id" = $1;`;
+    //this gets current games in the db by auth user who started the game
+    const sqlText = `
+    SELECT * 
+    FROM "game" 
+    JOIN "round" ON ("game"."id" = "round"."game_id") 
+    WHERE "user_id" = $1 AND "game"."game_status" = 1
+    ORDER BY "round"."hole_number";`;
     pool.query(sqlText, [req.user.id]).then((response) => {
         res.send(response.rows);
     }).catch((error) => {
@@ -50,15 +55,17 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-router.get('/current', rejectUnauthenticated, (req, res) => {
+router.get('/current/:id', rejectUnauthenticated, (req, res) => {
     // GET route code here
-    //this gets all the games in the db by auth user who started the game
+    //this gets the current game round in the db by auth user who started the game
     const sqlText = `
     SELECT * 
     FROM "game"
     JOIN "round" ON ("game"."id" = "round"."game_id")
-    WHERE "user_id" = $1 AND "game"."game_status" = 1;`;
-    pool.query(sqlText, [req.user.id]).then((response) => {
+    WHERE "user_id" = $1 
+    AND "game"."game_status" = 1
+    AND "round"."id" = $2;`;
+    pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
         res.send(response.rows);
     }).catch((error) => {
         console.log('GET req problems on server', error);
@@ -67,7 +74,7 @@ router.get('/current', rejectUnauthenticated, (req, res) => {
 });
 
 //GET points for the game
-router.get('/point/:id', rejectUnauthenticated, (req, res) => {
+router.get('/point', rejectUnauthenticated, (req, res) => {
     // GET route code here
     //need user id
     //game id is provided by params
@@ -81,7 +88,7 @@ router.get('/point/:id', rejectUnauthenticated, (req, res) => {
     JOIN "game" ON ("round"."game_id" = "game"."id")
     JOIN "user" ON ("game"."user_id" = "user"."id")
     WHERE "user"."id" = $1 AND "game_id" = $2;`;
-    pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
+    pool.query(sqlText, [req.user.id, req.body.game_id]).then((response) => {
         // let gamePoints = response.rows;
         // let gameData = cleanUp(gamePoints);
         // console.log(gameData);

@@ -27,6 +27,7 @@ import RoundPage from '../RoundPage/RoundPage.jsx';
 import BingoPage from '../BingoPage/BingoPage.jsx';
 import BangoPage from '../BangoPage/BangoPage.jsx';
 import BongoPage from '../BongoPage/BongoPage.jsx';
+import PointsPage from '../PointsPage/PointsPage.jsx';
 import './App.css';
 
 function App() {
@@ -108,17 +109,6 @@ function App() {
           >
             <LandingPage />
           </ProtectedRoute>
-
-          {/* <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows GamePage at "/gamePage"
-            exact
-            path="/gamePage"
-            authRedirect="/user"
-          >
-            <GamePage />
-          </ProtectedRoute> */}
           
           <Route path="/gamePage">
             <GamePage />
@@ -138,6 +128,10 @@ function App() {
 
           <Route path="/bongo">
             <BongoPage />
+          </Route>
+
+          <Route path="/points">
+            <PointsPage />
           </Route>
 
           <Route path="/rules">

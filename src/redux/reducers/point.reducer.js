@@ -1,6 +1,6 @@
 
-const defaultState = {bingo: '', bango: '', bongo: ''};
-const pointReducer = (state = [defaultState], action) => {
+// const defaultState = {bingo: '', bango: '', bongo: ''};
+const pointReducer = (state = [], action) => {
     switch (action.type) {
         //create an array of point obj: 
         //[{bingo: player, bango: player, bongo: player}]

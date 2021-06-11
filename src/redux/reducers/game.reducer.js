@@ -1,6 +1,6 @@
 const gameReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SET_CURRENT_GAME':
+      case 'SET_GAME_ROUND':
         return action.payload;
       case 'DELETE_GAME':
         return {};
