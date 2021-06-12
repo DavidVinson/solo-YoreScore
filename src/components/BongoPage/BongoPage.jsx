@@ -25,7 +25,7 @@ function BongoPage(props) {
         console.log(`${player} awarded Bongo!`);
 
         dispatch({
-            type: 'ASSIGN_POINT',
+            type: 'SET_POINT',
             payload: {
                 bongo: player
             }

@@ -24,7 +24,7 @@ function BingoPage(props) {
         console.log(`${player} awarded Bingo!`);
 
         dispatch({
-            type: 'ASSIGN_POINT',
+            type: 'SET_POINT',
             payload: {
                 bingo: player
             }

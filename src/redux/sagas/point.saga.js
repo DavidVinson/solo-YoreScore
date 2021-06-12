@@ -1,17 +1,18 @@
 import { put, takeLatest } from 'redux-saga/effects';
+import axios from 'axios';
 
 // worker Saga: will be fired on "ASSIGN_POINT" actions
 // point saga works only with redux point store
 // there are no axios calls to database
-function* assignPoint(action) {
-    try {
-        //going to point store
-        yield put({ type: 'SET_POINT', payload: action.payload });
+// function* assignPoint(action) {
+//     try {
+//         //going to point store
+//         yield put({ type: 'SET_POINT', payload: action.payload });
 
-    } catch (error) {
-        console.log('SET POINT to point store failed', error);
-    }
-}
+//     } catch (error) {
+//         console.log('SET POINT to point store failed', error);
+//     }
+// }
 
 function* clearPoints() {
     try {
@@ -38,7 +39,7 @@ function* fetchPoints(action) {
 
 
 function* pointSaga() {
-    yield takeLatest('ASSIGN_POINT', assignPoint);
+    // yield takeLatest('ASSIGN_POINT', assignPoint);
     yield takeLatest('CLEAR_POINTS_STORE', clearPoints);
     yield takeLatest('FETCH_POINTS', fetchPoints);
 }

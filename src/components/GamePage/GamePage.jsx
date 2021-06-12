@@ -16,13 +16,6 @@ function GamePage() {
     const [player3, setPlayer3] = useState('player3');
     const [player4, setPlayer4] = useState('player4');
 
-    // if (!isFrontNine) {
-    //     console.log('playing the back nine')
-    // }
-    // else {
-    //     console.log('playing from front nine');
-    // }
-
     const dispatch = useDispatch();
 
     const startGame = (event) => {
@@ -30,6 +23,7 @@ function GamePage() {
         console.log('form submitted');
 
         dispatch({
+            //game saga 
             type: 'START_GAME',
             payload: {
                 course: course,
@@ -49,6 +43,10 @@ function GamePage() {
         setPlayer2('player2');
         setPlayer3('player3');
         setPlayer4('player4');
+
+        //Go and get the new game
+        //the game saga activate
+        dispatch({type: 'FETCH_GAME_ROUND'});
 
         //send user to round page begin
         history.push('/roundPage');
@@ -114,6 +112,7 @@ function GamePage() {
                         name="player1"
                         required
                         value={player1}
+                        readOnly
                         // onChange={(event) => setPlayer1(event.target.value)}
                     />
                 </label>

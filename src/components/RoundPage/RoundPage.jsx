@@ -8,17 +8,21 @@ function RoundPage(props) {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch({type: 'FETCH_GAME_ROUND'})
+    dispatch({ type: 'FETCH_GAME_ROUND' })
   }, [])
 
   //currentGame will be an array of game rounds
-  const currentGame = useSelector((store) => store.game);
+  //the currentGame should be in game reducer when game was created
+  const myGames = useSelector((store) => store.game);
+  const currentGame = myGames[myGames.length - 1] || {}; // could be undefined
+
+  const store = useSelector((store) => store);
+  console.log('my store ??', store);
   const points = useSelector((store) => store.point);
   const [heading, setHeading] = useState('');
 
 
-  // console.log('game round from store', currentGame);
-  // console.log('game round from store', currentGame[currentGame.length - 1].hole_number);
+  console.log('game round from store', currentGame.current_round);
   console.log('current points from store', points);
 
 
@@ -37,7 +41,7 @@ function RoundPage(props) {
     history.push('/bongo');
   }
 
-  function nextHole(currentGame, points) {
+  function nextHole() {
     //[x]dispatch points to db
     //[x]reset points store to empty
     //[x]dispatch game to next round
@@ -53,12 +57,14 @@ function RoundPage(props) {
     }
     */
 
+    // let pointsObj = {...currentGame, ...points };
+
     let pointObj = {
-      game_id: currentGame[currentGame.length - 1].game_id,
-      hole_number: currentGame[currentGame.length - 1].hole_number,
-      bingo: points[0].bingo,
-      bango: points[1].bango,
-      bongo: points[2].bongo
+      game_id: currentGame.game_id,
+      hole_number: currentGame.hole_number,
+      bingo: points.bingo, //player name //...points
+      bango: points.bango,
+      bongo: points.bongo
     }
 
     console.log('point obj', pointObj);
@@ -79,8 +85,8 @@ function RoundPage(props) {
       //updates current round in game table by 1
       type: 'SET_NEXT_ROUND',
       payload: {
-        user_id: currentGame[currentGame.length - 1].user_id,
-        game_id: currentGame[currentGame.length - 1].game_id
+        user_id: currentGame.user_id,
+        game_id: currentGame.game_id
       }
     })
     dispatch({
@@ -88,58 +94,89 @@ function RoundPage(props) {
       //creates new record in round table
       type: 'SET_NEXT_HOLE',
       payload: {
-        game_id: currentGame[currentGame.length - 1].game_id,
-        hole_number: currentGame[currentGame.length - 1].hole_number
+        game_id: currentGame.game_id,
+        hole_number: currentGame.hole_number
       }
     })
-    // dispatch({
-    //   //axios GET to api/game to game saga
-    //   //gets the current game and round info
-    //   type: 'FETCH_GAME_ROUND'
-    // })
-    history.push('/points');
+    dispatch({
+      //axios GET to api/game to game saga
+      //gets the current game and round info
+      type: 'FETCH_GAME_ROUND'
+    })
+
+    history.push('/roundPage');
   }
 
-  return (
-    <div>
-      <h2>Hole {currentGame[currentGame.length - 1].hole_number}</h2>
-      <h2 onClick={assignBingo}>Bingo!</h2>
-      <h2 onClick={assignBango}>Bango!</h2>
-      <h2 onClick={assignBongo}>Bongo!</h2>
-      {points.length === 3 && <button onClick={() => nextHole(currentGame, points)}>Next Hole</button>}
+  function gameOver() {
+    //update game table to game_state = 2 api/game/end
+    //endpoint needs: game id, user id
+    //navigate to points page
+    console.log('player', currentGame.user_id);
+    console.log('current game', currentGame.game_id);
 
-    </div>
-  );
-}
+    let pointObj = {
+      game_id: currentGame.game_id,
+      hole_number: currentGame.hole_number,
+      bingo: points.bingo, //player name //...points
+      bango: points.bango,
+      bongo: points.bongo
+    }
 
-export default RoundPage;
+    dispatch({
+      //axios PUT to api/round to the round saga
+      //updates current hole with player points
+      type: 'SEND_POINTS',
+      payload: pointObj
+    })
 
-/*
+    dispatch({
+      //no axios call. dispatch to point saga
+      // to clear redux point store
+      type: 'CLEAR_POINTS_STORE'
+    })
 
+    dispatch({
+      //axios PUT to api/game/end
+      type: 'END_GAME',
+      payload: {
+        user_id: currentGame.user_id,
+        game_id: currentGame.game_id,
+      }
+    })
 
-  if (!points) {
+    history.push('/points');
+
+  }
+
+  if (!currentGame) {
+    return (
+      <p>Loading...</p>
+    );
+  }
+
+  else if (currentGame.current_round === 9) {
     return (
       <div>
-        <h2>{heading}</h2>
+        <p>Hole {currentGame.hole_number}</p>
         <h2 onClick={assignBingo}>Bingo!</h2>
         <h2 onClick={assignBango}>Bango!</h2>
         <h2 onClick={assignBongo}>Bongo!</h2>
+        {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <button onClick={gameOver}>Game Over</button>}
       </div>
     );
   }
+
   else {
     return (
       <div>
-        <h2>{heading}</h2>
-        {points ? <h2 onClick={assignBingo}>Bingo!</h2> : <h2>Bingo! {bingoPoint}</h2>}
-        {points ? <h2 onClick={assignBango}>Bango!</h2> : <h2>Bango! {bangoPoint}</h2>}
-        {points ? <h2 onClick={assignBongo}>Bongo!</h2> : <h2>Bongo! {bongoPoint}</h2>}
-        {points.length === 3 && <button>Next Hole</button>}
-
+        <p>Hole {currentGame.hole_number}</p>
+        <h2 onClick={assignBingo}>Bingo!</h2>
+        <h2 onClick={assignBango}>Bango!</h2>
+        <h2 onClick={assignBongo}>Bongo!</h2>
+        {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <button onClick={nextHole}>Next Hole</button>}
       </div>
     );
-
   }
+}
 
-
-*/
+export default RoundPage;

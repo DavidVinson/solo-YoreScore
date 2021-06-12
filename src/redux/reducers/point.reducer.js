@@ -1,13 +1,16 @@
 
-// const defaultState = {bingo: '', bango: '', bongo: ''};
-const pointReducer = (state = [], action) => {
+const defaultState = {bingo: '', bango: '', bongo: ''};
+const pointReducer = (state = defaultState, action) => {
     switch (action.type) {
         //create an array of point obj: 
         //[{bingo: player, bango: player, bongo: player}]
       case 'SET_POINT': 
-        return [...state, action.payload];
+        return {
+          ...state,
+          ...action.payload // { bingo: 'dave' }
+        };
       case 'CLEAR_POINT':
-          return [];
+          return defaultState;
       default:
         return state;
     }

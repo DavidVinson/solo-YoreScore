@@ -29,8 +29,15 @@ function Nav() {
 
         {user.id && (
           <>
+            <Link className="navLink" to="/admin">
+              Admin
+            </Link>
+
             <Link className="navLink" to="/info">
               Info Page
+            </Link>
+            <Link className="navLink" to="/points">
+              Payout Page
             </Link>
             <LogOutButton className="navLink" />
           </>
@@ -38,7 +45,7 @@ function Nav() {
         <Link className="navLink" to="/rules">
           Game Rules
         </Link>
-        
+
         <Link className="navLink" to="/about">
           About
         </Link>
