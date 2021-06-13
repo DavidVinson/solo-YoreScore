@@ -29,7 +29,7 @@ function cleanUp(arr) {
 
 }
 
-router.get('/all', rejectUnauthenticated, (req, res) => {
+router.get('/admin', rejectUnauthenticated, (req, res) => {
     // GET route: may be a admin endpoint. currently, any authenticated user
     // can view all the games.
     //this gets all the games in the db
@@ -37,8 +37,29 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
     SELECT "game"."id" AS "gameId", "user"."id" AS "userId", "user"."username",
     "game"."course", "game"."wager", "game"."end_time"
     FROM "game"
-    JOIN "user" ON ("game"."user_id" = "user"."id");`;
+    JOIN "user" ON ("game"."user_id" = "user"."id")
+    WHERE "game"."game_status" = 2;`;
     pool.query(sqlText).then((response) => {
+        res.send(response.rows);
+    }).catch((error) => {
+        console.log('GET All games req problems on server', error);
+        res.sendStatus(500);
+    })
+});
+
+
+
+router.get('/all', rejectUnauthenticated, (req, res) => {
+    // GET route to get all completed games (status=2) by auth user where 
+    // can view all the games.
+    //this gets all the games in the db
+    const sqlText = `
+    SELECT "game"."id" AS "gameId", "user"."id" AS "userId", "user"."username",
+    "game"."course", "game"."wager", "game"."end_time"
+    FROM "game"
+    JOIN "user" ON ("game"."user_id" = "user"."id")
+    WHERE "user_id" = $1 AND "game"."game_status" = 2;`;
+    pool.query(sqlText, [req.user.id]).then((response) => {
         res.send(response.rows);
     }).catch((error) => {
         console.log('GET All games req problems on server', error);
@@ -64,6 +85,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+//currently not being used****
 router.get('/current/:id', rejectUnauthenticated, (req, res) => {
     // GET route code here
     //this gets the current game round in the db by auth user who started the game

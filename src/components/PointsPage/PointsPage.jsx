@@ -46,6 +46,25 @@ function PointsPage(props) {
             <div>
                 <p>{JSON.stringify(gamePoints)}</p>
             </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hole</th>
+                        <th>Bingo</th>
+                        <th>Bango</th>
+                        <th>Bongo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {gamePoints.map((gamePoint) => 
+                    <tr key={gamePoint.round_id}>
+                        <td>{gamePoint.hole_number}</td>
+                        <td>{gamePoint.bingo}</td>
+                        <td>{gamePoint.bango}</td>
+                        <td>{gamePoint.bongo}</td>
+                    </tr>)}
+                </tbody>
+            </table>
             </>
         );
     

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {useHistory} from 'react-router-dom';
 
-function AdminPage(props) {
+function YoreGames(props) {
     const allGames = useSelector((store) => store.allgames);
     const user = useSelector((store) => store.user);
     // console.log('all games', allGames);
 
-    const [heading, setHeading] = useState('Admin Component');
+    const [heading, setHeading] = useState('All Yore Games');
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_GAMES' })
@@ -45,7 +47,9 @@ function AdminPage(props) {
                         <td>{game.course}</td>
                         <td>{game.wager}</td>
                         <td>{game.end_time}</td>
+                        <td><button onClick={() => history.push('/points')}>YoreScore!</button></td>
                         <td><button onClick={() => deleteGame(game.gameId)}>Delete</button></td>
+
                     </tr>)}
 
                 </tbody>
@@ -54,4 +58,4 @@ function AdminPage(props) {
     );
 }
 
-export default AdminPage;
+export default YoreGames;
