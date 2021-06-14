@@ -16,7 +16,7 @@ function UserPage() {
     dispatch({type: 'FETCH_GAME_ROUND'})
   }, [])
 
-  if (!myGames) {
+  if (myGames) {
     return (
       <div className="container">
         <h2>Welcome, {user.username}!</h2>

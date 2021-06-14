@@ -160,7 +160,7 @@ function RoundPage(props) {
     );
   }
 
-  else if (currentGame.current_round === 9) {
+  else if (currentGame.current_round === 3) {
     return (
       <div>
         <p>Hole {currentGame.hole_number}</p>

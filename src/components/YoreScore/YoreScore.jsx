@@ -41,6 +41,8 @@ function YoreScore(props) {
         return (
             <tr>
                 <td>{JSON.stringify(score)}</td>
+                <td><button onClick={() => history.push('/home')}>Home</button></td>
+
             </tr>
         );
     }
