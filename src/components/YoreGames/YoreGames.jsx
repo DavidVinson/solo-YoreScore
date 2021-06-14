@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 function YoreGames(props) {
+
+    //This page responsible for displaying the user's games
     const allGames = useSelector((store) => store.allgames);
     const user = useSelector((store) => store.user);
-    console.log('all games', allGames);
+    console.log('all games on YoreGames page', allGames);
 
     const [heading, setHeading] = useState('All Yore Games');
 
@@ -14,7 +16,7 @@ function YoreGames(props) {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_GAMES' })
-    }, [])
+    }, [dispatch])
 
     function deleteGame(gameId) {
         //dispatch to game saga
@@ -25,6 +27,19 @@ function YoreGames(props) {
             payload: gameId
         })
     }
+
+    function getScores(gameId) {
+        //dispatch to FETCH_YORE_SCORE
+        console.log('the game score id', gameId);
+        dispatch({
+            type: 'FETCH_YORE_SCORE',
+            payload: gameId
+        })
+
+        history.push(`/score/${gameId}`);
+    }
+
+
 
 
     return (
@@ -45,7 +60,7 @@ function YoreGames(props) {
                             <td>{game.username}</td>
                             <td>{game.course}</td>
                             <td>{game.end_time}</td>
-                            <td><button onClick={() => history.push(`/score/${game.gameId}`)}>YoreScore!</button></td>
+                            <td><button onClick={() => getScores(game.gameId)}>YoreScore!</button></td>
                             <td><button onClick={() => deleteGame(game.gameId)}>Delete</button></td>
 
                         </tr>)}

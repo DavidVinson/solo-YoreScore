@@ -147,7 +147,7 @@ function RoundPage(props) {
     dispatch({
       //get the score ready
       type: 'FETCH_YORE_SCORE',
-      payload: currentGame.game_id
+      payload: currentGame.game_id 
     })
 
     history.push(`/score/${currentGame.game_id}`);
@@ -176,9 +176,9 @@ function RoundPage(props) {
     return (
       <div>
         <p>Hole {currentGame.hole_number}</p>
-        <h2 onClick={assignBingo}>Bingo!</h2>
-        <h2 onClick={assignBango}>Bango!</h2>
-        <h2 onClick={assignBongo}>Bongo!</h2>
+        {points.bingo !== '' ? <h2 onClick={assignBingo}>Bingo! {points.bingo}</h2> : <h2 onClick={assignBingo}>Bingo!</h2>}
+        {points.bango !== '' ? <h2 onClick={assignBango}>Bango! {points.bango}</h2> : <h2 onClick={assignBango}>Bango!</h2>}
+        {points.bongo !== '' ? <h2 onClick={assignBongo}>Bongo! {points.bongo}</h2> : <h2 onClick={assignBongo}>Bongo!</h2>}
         {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <button onClick={nextHole}>Next Hole</button>}
       </div>
     );

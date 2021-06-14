@@ -19,7 +19,7 @@ function* startGame(action) {
       //response will be an array of game rounds
       const response = yield axios.get('/api/game');
       console.log('GET game round from db', response.data);
-      //SET_GAME_ROUND is game reducer
+      //SET_GAME_ROUND in game reducer
       yield put({ type: 'SET_GAME_ROUND', payload: response.data });
 
     } catch (error) {
@@ -80,6 +80,7 @@ function* startGame(action) {
       try {
         //GET the score for the game
         console.log('the get score action', action.payload);
+
         const response = yield axios.get(`/api/game/score/${action.payload}`);
         console.log('YoreScore!', response.data);
         //SET_YORE_SCORE in score reducer

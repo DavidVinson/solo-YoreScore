@@ -4,7 +4,7 @@ const scoreReducer = (state = [], action) => {
       case 'SET_YORE_SCORE': 
         return action.payload;
       case 'CLEAR_SCORE':
-          return {};
+          return [];
       default:
         return state;
     }

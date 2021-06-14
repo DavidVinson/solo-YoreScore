@@ -4,6 +4,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 function cleanUp(arr) {
+    let wager = arr[0].wager;
     let scores = [];
     let res = {};
 
@@ -21,9 +22,10 @@ function cleanUp(arr) {
     arr.forEach(function(v) {
         res[v.bongo] = (res[v.bongo] || 0) + 1;
     })
-
+    res['wager'] = wager;
     scores.push(res);
-    // console.log(res);
+    // console.log('wager', wager);
+    console.log(res);
     // console.log(points);
     return scores;
 
@@ -53,7 +55,7 @@ router.get('/admin', rejectUnauthenticated, (req, res) => {
 router.get('/all', rejectUnauthenticated, (req, res) => {
     // GET route to get all completed games (status=2) by auth user where 
     // can view all the games.
-    //this gets all the games in the db
+    //this gets all the games in the db and is used by game Saga FETCH_ALL_GAMES
     const sqlText = `
     SELECT "game"."id" AS "gameId", "user"."id" AS "userId", "user"."username",
     "game"."course", "game"."wager", "game"."end_time"
@@ -104,9 +106,9 @@ router.get('/score/:id', rejectUnauthenticated, (req, res) => {
         // console.log('game data', gameData);
         //gamePoints is an object {"dave": 5, "mike": 6, "joe": 8}
         let gameScore = cleanUp(gameData);
-        console.log('the score', gameScore);
+        // console.log('the score', gameScore);
         const scores = [...gameData, ...gameScore];
-        // console.log('the db scores', scores);
+        // console.log('db game data', scores);
         res.send(scores);
         // console.log('the payout sql response', response.rows);
         // res.send(response.rows);

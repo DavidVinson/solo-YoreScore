@@ -12,32 +12,30 @@ function UserPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({type: 'FETCH_GAME_ROUND'})
-  }, [])
+  // useEffect(() => {
+  //   dispatch({type: 'FETCH_GAME_ROUND'})
+  // }, [])
 
-  if (myGames) {
+  if (myGames.length > 0) {
     return (
       <div className="container">
         <h2>Welcome, {user.username}!</h2>
         <p>Your ID is: {user.id}</p>
         <LogOutButton className="btn" />
         <button onClick={() => history.push('/gamePage')}>Start New Game</button>
-        {myGames && <button onClick={() => history.push('/roundPage')}>Continue Game</button>}
+        <button onClick={() => history.push('/roundPage')}>Continue Game</button>
       </div>
 
     );
   }
 
   else {
-
     return (
       <div className="container">
         <h2>Welcome, {user.username}!</h2>
         <p>Your ID is: {user.id}</p>
         <LogOutButton className="btn" />
         <button onClick={() => history.push('/gamePage')}>Start New Game</button>
-        {/* {myGames && <button onClick={() => history.push('/roundPage')}>Continue Game</button>} */}
       </div>
     );
   }
