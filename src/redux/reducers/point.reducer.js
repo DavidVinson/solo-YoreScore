@@ -9,6 +9,8 @@ const pointReducer = (state = defaultState, action) => {
           ...state,
           ...action.payload // { bingo: 'dave' }
         };
+
+        //clear the bingo, bango, bongo points for store
       case 'CLEAR_POINT':
           return defaultState;
       default:

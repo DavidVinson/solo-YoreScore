@@ -33,7 +33,7 @@ function Nav() {
               Admin
             </Link> */}
 
-            <Link className="navLink" to="/games">
+            <Link className="navLink" to="/game">
               Yore Games
             </Link>
 
@@ -41,9 +41,6 @@ function Nav() {
               Info Page
             </Link> */}
 
-            <Link className="navLink" to="/points">
-              Payout Page
-            </Link>
             <LogOutButton className="navLink" />
           </>
         )}

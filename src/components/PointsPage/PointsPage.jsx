@@ -5,69 +5,59 @@ import { useHistory } from 'react-router-dom';
 function PointsPage(props) {
 
     useEffect(() => {
-        dispatch({type: 'FETCH_POINTS'})
+        dispatch({ type: 'FETCH_POINTS' }),
+        dispatch({type: 'FETCH_ALL_GAMES'})
     }, [])
 
-    const gamePoints = useSelector((store) => store.payout);
-    console.log('the game points', gamePoints);
-
-    //payout: {player1: pts, player2: pts, player3: pts, player4: pts}
-    const payout = gamePoints.pop();
-    // console.log(Object.entries(payout));
-    console.log('payout', payout);
-    // console.log('players payout', playersPayout);
-
-    const [heading, setHeading] = useState('Points Page');
     const history = useHistory();
     const dispatch = useDispatch();
+    
+    const gamePoints = useSelector((store) => store.payout);
+    const games = useSelector((store) => store.allgames);
+
+    //gamePoints: {player1: pts, player2: pts, player3: pts, player4: pts}
+    console.log('the game points', gamePoints);
+    console.log('games', games);
+
+    const [heading, setHeading] = useState('Points Page');
+
+    function displayPayout() {
+
+        const players = Object.fromEntries(Object.entries(gamePoints).map(([key, value]) => [key, value * 2]));
+        console.log('the players', players);
+        return (
+
+            <tr>
+                <td>{JSON.stringify(players)}</td>
+            </tr>
+        );
+    }
+
 
     if (!gamePoints) return (<p>Loading...</p>); //have to refresh page
 
     else {
-        // let playerPoints = Object.entries(payout);
-        // console.log('players', playerPoints);
+
         return (
 
             <>
-            <h2>Payout</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Payout</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{JSON.stringify(payout)}</td>  
-                    </tr>
-                </tbody>
-            </table>
-            <hr/>
-            <div>
-                <p>{JSON.stringify(gamePoints)}</p>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Hole</th>
-                        <th>Bingo</th>
-                        <th>Bango</th>
-                        <th>Bongo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {gamePoints.map((gamePoint) => 
-                    <tr key={gamePoint.round_id}>
-                        <td>{gamePoint.hole_number}</td>
-                        <td>{gamePoint.bingo}</td>
-                        <td>{gamePoint.bango}</td>
-                        <td>{gamePoint.bongo}</td>
-                    </tr>)}
-                </tbody>
-            </table>
+                <h2>Payout</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Payout</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* <tr>
+                            <td>{JSON.stringify(players)}</td>
+                        </tr> */}
+                    {displayPayout(gamePoints)}
+                    </tbody>
+                </table>
             </>
         );
-    
+
     }
 
 }

@@ -77,7 +77,7 @@ function RoundPage(props) {
     })
     dispatch({
       //no axios call. dispatch to point saga
-      // to clear redux point store
+      // to clear redux point store (bingo, bango, bongo points)
       type: 'CLEAR_POINTS_STORE'
     })
     dispatch({
@@ -131,7 +131,7 @@ function RoundPage(props) {
 
     dispatch({
       //no axios call. dispatch to point saga
-      // to clear redux point store
+      // to clear redux point store (bingo, bango, bongo points)
       type: 'CLEAR_POINTS_STORE'
     })
 
@@ -144,7 +144,13 @@ function RoundPage(props) {
       }
     })
 
-    history.push('/points');
+    dispatch({
+      //get the score ready
+      type: 'FETCH_YORE_SCORE',
+      payload: currentGame.game_id
+    })
+
+    history.push(`/score/${currentGame.game_id}`);
 
   }
 

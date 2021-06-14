@@ -4,7 +4,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 function cleanUp(arr) {
-    let points = [];
+    let scores = [];
     let res = {};
 
     //count bingo point for each player
@@ -22,10 +22,10 @@ function cleanUp(arr) {
         res[v.bongo] = (res[v.bongo] || 0) + 1;
     })
 
-    points.push(res);
+    scores.push(res);
     // console.log(res);
     // console.log(points);
-    return points;
+    return scores;
 
 }
 
@@ -38,7 +38,8 @@ router.get('/admin', rejectUnauthenticated, (req, res) => {
     "game"."course", "game"."wager", "game"."end_time"
     FROM "game"
     JOIN "user" ON ("game"."user_id" = "user"."id")
-    WHERE "game"."game_status" = 2;`;
+    WHERE "game"."game_status" = 2
+    ORDER BY "round"."hole_number";`;
     pool.query(sqlText).then((response) => {
         res.send(response.rows);
     }).catch((error) => {
@@ -85,21 +86,33 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-//currently not being used****
-router.get('/current/:id', rejectUnauthenticated, (req, res) => {
+
+router.get('/score/:id', rejectUnauthenticated, (req, res) => {
     // GET route code here
-    //this gets the current game round in the db by auth user who started the game
+    //this gets single game from db by auth user who created the game
+    console.log('the score body', req.params.id);
     const sqlText = `
-    SELECT * 
-    FROM "game"
-    JOIN "round" ON ("game"."id" = "round"."game_id")
-    WHERE "user_id" = $1 
-    AND "game"."game_status" = 1
-    AND "round"."id" = $2;`;
+    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "game"."wager",
+    "round"."id" AS "round_id", "round"."game_id", "round"."hole_number",
+    "round"."bingo", "round"."bango", "round"."bongo" 
+    FROM "round"
+    JOIN "game" ON ("round"."game_id" = "game"."id")
+    JOIN "user" ON ("game"."user_id" = "user"."id")
+    WHERE "user"."id" = $1 AND "game_id" = $2;`;
     pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
-        res.send(response.rows);
+        let gameData = response.rows;
+        // console.log('game data', gameData);
+        //gamePoints is an object {"dave": 5, "mike": 6, "joe": 8}
+        let gameScore = cleanUp(gameData);
+        console.log('the score', gameScore);
+        const scores = [...gameData, ...gameScore];
+        // console.log('the db scores', scores);
+        res.send(scores);
+        // console.log('the payout sql response', response.rows);
+        // res.send(response.rows);
+        // res.sendStatus(200);
     }).catch((error) => {
-        console.log('GET req problems on server', error);
+        console.log('GET score req problems on server', error);
         res.sendStatus(500);
     })
 });
@@ -108,7 +121,6 @@ router.get('/current/:id', rejectUnauthenticated, (req, res) => {
 router.get('/point', rejectUnauthenticated, (req, res) => {
     // GET route code here
     //need user id
-    //game id is provided by params
     //this gets the current game in the db by auth user
     //and return sum of player points through current hole.
     console.log('the points for user game', req.user.id);
@@ -121,11 +133,12 @@ router.get('/point', rejectUnauthenticated, (req, res) => {
     JOIN "user" ON ("game"."user_id" = "user"."id")
     WHERE "user"."id" = $1;`;
     pool.query(sqlText, [req.user.id]).then((response) => {
-        let gamePoints = response.rows;
-        let gameData = cleanUp(gamePoints);
-        console.log(gameData);
-        const endgameInfo = [...gamePoints, ...gameData];
-        res.send(endgameInfo);
+        let gameData = response.rows;
+        //gamePoints is an object {"dave": 5, "mike": 6, "joe": 8}
+        let gamePoints = cleanUp(gameData);
+        console.log(gamePoints);
+        // const endgameInfo = [...gameData, ...gamePoints];
+        res.send(gamePoints);
         // console.log('the payout sql response', response.rows);
         // res.send(response.rows);
         // res.sendStatus(200);

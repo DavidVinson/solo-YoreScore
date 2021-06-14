@@ -5,8 +5,9 @@ import axios from 'axios';
 function* startGame(action) {
     try {
       yield axios.post('/api/game/start', action.payload);
-      //after new game started, GET the new game created
-      // yield put({type: 'FETCH_GAME_ROUND'});
+      //after new game started, CLEAR point and score reducers
+      yield put({type: 'CLEAR_POINT'});
+      yield put({type: 'CLEAR_SCORE'});
 
     } catch (error) {
       console.log('Start Game post request failed', error);
@@ -74,6 +75,21 @@ function* startGame(action) {
     }
   }
 
+
+  function* fetchYoreScore(action) {
+      try {
+        //GET the score for the game
+        console.log('the get score action', action.payload);
+        const response = yield axios.get(`/api/game/score/${action.payload}`);
+        console.log('YoreScore!', response.data);
+        //SET_YORE_SCORE in score reducer
+        yield put({ type: 'SET_YORE_SCORE', payload: response.data });
+  
+      } catch (error) {
+        console.log('YoreScore game request failed', error);
+      }
+  }
+
   
   function* gameSaga() {
     yield takeLatest('START_GAME', startGame);
@@ -82,6 +98,7 @@ function* startGame(action) {
     yield takeLatest('FETCH_ALL_GAMES', fetchAllGames);
     yield takeLatest('DELETE_GAME', deleteGame);
     yield takeLatest('END_GAME', endGame);
+    yield takeLatest('FETCH_YORE_SCORE', fetchYoreScore);
   }
   
 
