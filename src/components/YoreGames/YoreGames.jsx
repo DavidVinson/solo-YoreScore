@@ -62,8 +62,8 @@ function YoreGames(props) {
                             <td>{game.username}</td>
                             <td>{game.course}</td>
                             <td>{game.end_time}</td>
-                            <td><Button onClick={() => getScores(game.gameId)}>YoreScore!</Button></td>
-                            <td><Button onClick={() => deleteGame(game.gameId)}>Delete</Button></td>
+                            <td><Button size="sm" onClick={() => getScores(game.gameId)}>YoreScore!</Button></td>
+                            <td><Button size="sm" onClick={() => deleteGame(game.gameId)}>Delete</Button></td>
 
                         </tr>)}
 

@@ -19,7 +19,7 @@ function LandingPage() {
 
       <div className="grid">
         <div className="grid-col grid-col_8">
-          <h3>Never forget who won...remind them with YoreScore!</h3>
+          <h3>Never forget who won...remind them with Yore Score!</h3>
         </div>
         <div className="grid-col grid-col_4">
           <RegisterForm />
