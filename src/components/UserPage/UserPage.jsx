@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -24,48 +23,53 @@ function UserPage() {
   if (myGames.length > 0) {
     return (
       <Container>
-        <Row>
-          <Col>
-            <h2>Welcome, {user.username}!</h2>
-            {/* <p>Your ID is: {user.id}</p> */}
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
-            <Button onClick={() => history.push('/roundPage')}>Continue Game</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-          <LogOutButton className="btn" />
-          </Col>
-        </Row>
+        <center>
+          <Row>
+            <Col>
+              <h2>Hey, {user.username}!</h2>
+              {/* <p>Your ID is: {user.id}</p> */}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
 
+              <h4>{myGames[0].course}...in progress</h4>
+              <Button onClick={() => history.push('/roundPage')}>Continue Game</Button>
+
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <LogOutButton className="btn" />
+            </Col>
+          </Row>
+        </center>
       </Container>
-
     );
   }
 
   else {
     return (
       <Container>
-        <Row>
-          <Col>
-          <h2>Welcome, {user.username}!</h2>
-        {/* <p>Your ID is: {user.id}</p> */}
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-          <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-          <LogOutButton className="btn" />
-          </Col>
-        </Row>
+        <center>
+          <Row>
+            <Col>
+              <h2>Welcome, {user.username}!</h2>
+              {/* <p>Your ID is: {user.id}</p> */}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <LogOutButton className="btn" />
+            </Col>
+          </Row>
+
+        </center>
       </Container>
     );
   }

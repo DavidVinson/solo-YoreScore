@@ -27,7 +27,7 @@ function LandingPage() {
       <Row>
         <Col>
           <p>Yore Score tracks the points awarded for each player during a game of Bingo, Bango, Bongo.
-            Point totals and payout have never been easier! Never forget who won with Yore Score!</p>
+            Point totals and payouts made easy! Never forget who won with Yore Score!</p>
         </Col>
       </Row>
       <Row>
