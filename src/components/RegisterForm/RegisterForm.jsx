@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 
 
 function RegisterForm() {
@@ -22,41 +24,43 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
+    <Form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
+      
+        <Form.Group controlId="username">
+        <Form.Label>
+        Username:
+        <Form.Control
             type="text"
             name="username"
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
+            />
+        </Form.Label>
+        </Form.Group>
+     
+      <Form.Group controlId="password">
+        <Form.Label>
+        Password:
+        <Form.Control
             type="password"
             name="password"
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
+            />
+        </Form.Label>
+        </Form.Group>
+     
+        <Button className="btn" type="submit" name="submit" value="Register">Submit</Button>
+    
+    </Form>
   );
 }
 
