@@ -60,28 +60,32 @@ function GamePage() {
         <form className="formPanel" onSubmit={startGame}>
             <h2>New Game</h2>
             <div>
-                <label htmlFor="course">
+                <Form.Group controlId="course">
+                <Form.Label>
                     Course:
-                        <input
+                        <Form.Control
                         type="text"
                         name="course"
                         required
                         value={course}
                         onChange={(event) => setCourse(event.target.value)}
                     />
-                </label>
+                </Form.Label>
+                </Form.Group>
             </div>
             <div>
-                <label htmlFor="wager">
+                <Form.Group controlId="wager">
+                <Form.Label>
                     Wager:
-                        <input
+                        <Form.Control
                         type="number"
                         name="wager"
                         required
                         value={wager}
                         onChange={(event) => setWager(event.target.value)}
                     />
-                </label>
+                </Form.Label>
+                </Form.Group>
             </div>
 
             <div>
@@ -108,53 +112,60 @@ function GamePage() {
             </div>
 
             <div>
-                <label htmlFor="player1">
+                <Form.Group controlId="player1">
+                <Form.Label>
                     Player 1:
-                        <input
+                        <Form.Control
                         type="text"
                         name="player1"
                         required
                         value={player1}
                         readOnly
-                    // onChange={(event) => setPlayer1(event.target.value)}
                     />
-                </label>
+                </Form.Label>
+                </Form.Group>
             </div>
 
             <div>
-                <label htmlFor="player2">
+                <Form.Group controlId="player2">
+                <Form.Label>
                     Player 2:
-                        <input
+                        <Form.Control
                         type="text"
                         name="player2"
                         value={player2}
                         onChange={(event) => setPlayer2(event.target.value)}
                     />
-                </label>
+                </Form.Label>
+                </Form.Group>
             </div>
 
             <div>
-                <label htmlFor="player3">
+                <Form.Group controlId="player3">
+                <Form.Label>
                     Player 3:
-                        <input
+                        <Form.Control
                         type="text"
                         name="player3"
                         value={player3}
                         onChange={(event) => setPlayer3(event.target.value)}
                     />
-                </label>
+                </Form.Label>
+                </Form.Group>
             </div>
 
             <div>
-                <label htmlFor="player4">
+                <Form.Group controlId="player4">
+                <Form.Label>
                     Player 4:
-                        <input
+                        <Form.Control
                         type="text"
                         name="player4"
                         value={player4}
                         onChange={(event) => setPlayer4(event.target.value)}
                     />
-                </label>
+                </Form.Label>
+                </Form.Group>
             </div>
 
             <div>

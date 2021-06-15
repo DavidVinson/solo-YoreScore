@@ -25,7 +25,7 @@ function cleanUp(arr) {
     res['wager'] = wager;
     scores.push(res);
     // console.log('wager', wager);
-    console.log(res);
+    // console.log(res);
     // console.log(points);
     return scores;
 
@@ -100,7 +100,8 @@ router.get('/score/:id', rejectUnauthenticated, (req, res) => {
     FROM "round"
     JOIN "game" ON ("round"."game_id" = "game"."id")
     JOIN "user" ON ("game"."user_id" = "user"."id")
-    WHERE "user"."id" = $1 AND "game_id" = $2;`;
+    WHERE "user"."id" = $1 AND "game_id" = $2
+    ORDER BY "round"."hole_number";`;
     pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
         let gameData = response.rows;
         // console.log('game data', gameData);

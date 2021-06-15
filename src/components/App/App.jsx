@@ -132,7 +132,7 @@ function App() {
             <BongoPage />
           </Route>
 
-          <Route path="/score/:gameId">
+          <Route path="/score">
             <YoreScore />
           </Route>
 

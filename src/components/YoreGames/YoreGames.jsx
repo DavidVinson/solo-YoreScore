@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 function YoreGames(props) {
 
     //This page responsible for displaying the user's games
     const allGames = useSelector((store) => store.allgames);
     const user = useSelector((store) => store.user);
-    console.log('all games on YoreGames page', allGames);
+    // console.log('all games on YoreGames page', allGames);
 
-    const [heading, setHeading] = useState('All Yore Games');
+    const [heading, setHeading] = useState('Yore Games');
 
     const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_GAMES' })
-    }, [dispatch])
+    }, [])
+
 
     function deleteGame(gameId) {
         //dispatch to game saga
@@ -28,6 +31,7 @@ function YoreGames(props) {
         })
     }
 
+
     function getScores(gameId) {
         //dispatch to FETCH_YORE_SCORE
         console.log('the game score id', gameId);
@@ -36,16 +40,14 @@ function YoreGames(props) {
             payload: gameId
         })
 
-        history.push(`/score/${gameId}`);
+        history.push(`/score`);
     }
-
-
 
 
     return (
         <div>
             <h2>{heading}</h2>
-            <table>
+            <Table striped bordered hover size="sm" responsive="sm">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -60,13 +62,13 @@ function YoreGames(props) {
                             <td>{game.username}</td>
                             <td>{game.course}</td>
                             <td>{game.end_time}</td>
-                            <td><button onClick={() => getScores(game.gameId)}>YoreScore!</button></td>
-                            <td><button onClick={() => deleteGame(game.gameId)}>Delete</button></td>
+                            <td><Button onClick={() => getScores(game.gameId)}>YoreScore!</Button></td>
+                            <td><Button onClick={() => deleteGame(game.gameId)}>Delete</Button></td>
 
                         </tr>)}
 
                 </tbody>
-            </table>
+            </Table>
         </div>
     );
 }

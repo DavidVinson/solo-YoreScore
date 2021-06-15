@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 function RoundPage(props) {
 
@@ -16,13 +20,11 @@ function RoundPage(props) {
   const myGames = useSelector((store) => store.game);
   const currentGame = myGames[myGames.length - 1] || {}; // could be undefined
 
-  const store = useSelector((store) => store);
-  console.log('my store ??', store);
   const points = useSelector((store) => store.point);
   const [heading, setHeading] = useState('');
 
 
-  console.log('game round from store', currentGame.current_round);
+  // console.log('game round from store', currentGame.current_round);
   console.log('current points from store', points);
 
 
@@ -62,12 +64,12 @@ function RoundPage(props) {
     let pointObj = {
       game_id: currentGame.game_id,
       hole_number: currentGame.hole_number,
-      bingo: points.bingo, //player name //...points
+      bingo: points.bingo, 
       bango: points.bango,
       bongo: points.bongo
     }
 
-    console.log('point obj', pointObj);
+    // console.log('point obj', pointObj);
 
     dispatch({
       //axios PUT to api/round to the round saga
@@ -106,6 +108,7 @@ function RoundPage(props) {
 
     history.push('/roundPage');
   }
+
 
   function gameOver() {
     //update game table to game_state = 2 api/game/end
@@ -150,11 +153,12 @@ function RoundPage(props) {
       payload: currentGame.game_id 
     })
 
-    history.push(`/score/${currentGame.game_id}`);
+    //navigate to YoreScore page
+    history.push('/score');
 
   }
 
-  if (!currentGame) {
+  if (currentGame.length === 0) {
     return (
       <p>Loading...</p>
     );
@@ -162,25 +166,66 @@ function RoundPage(props) {
 
   else if (currentGame.current_round === 3) {
     return (
-      <div>
-        <p>Hole {currentGame.hole_number}</p>
-        <h2 onClick={assignBingo}>Bingo!</h2>
-        <h2 onClick={assignBango}>Bango!</h2>
-        <h2 onClick={assignBongo}>Bongo!</h2>
-        {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <button onClick={gameOver}>Game Over</button>}
-      </div>
+      <Container fluid>
+        <Row xs={12}>
+          <Col>
+          <h2>Hole {currentGame.hole_number}</h2>
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col>
+          {points.bingo !== '' ? <Button>Bingo! {points.bingo}</Button> : <Button onClick={assignBingo}>Bingo!</Button>}
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col>
+          {points.bango !== '' ? <Button>Bango! {points.bango}</Button> : <Button onClick={assignBango}>Bango!</Button>}
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col>
+          {points.bongo !== '' ? <Button>Bongo! {points.bongo}</Button> : <Button onClick={assignBongo}>Bongo!</Button>}
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col>
+          {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={gameOver}>Game Over</Button>}
+          </Col>
+        </Row>
+      </Container>
     );
   }
 
   else {
     return (
-      <div>
-        <p>Hole {currentGame.hole_number}</p>
-        {points.bingo !== '' ? <h2 onClick={assignBingo}>Bingo! {points.bingo}</h2> : <h2 onClick={assignBingo}>Bingo!</h2>}
-        {points.bango !== '' ? <h2 onClick={assignBango}>Bango! {points.bango}</h2> : <h2 onClick={assignBango}>Bango!</h2>}
-        {points.bongo !== '' ? <h2 onClick={assignBongo}>Bongo! {points.bongo}</h2> : <h2 onClick={assignBongo}>Bongo!</h2>}
-        {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <button onClick={nextHole}>Next Hole</button>}
-      </div>
+      <Container fluid>
+        <Row xs={12}>
+          <Col>
+          <h2>Hole {currentGame.hole_number}</h2>
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col>
+          {points.bingo !== '' ? <Button>Bingo! {points.bingo}</Button> : <Button onClick={assignBingo}>Bingo!</Button>}
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col>
+          {points.bango !== '' ? <Button>Bango! {points.bango}</Button> : <Button onClick={assignBango}>Bango!</Button>}
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col>
+          {points.bongo !== '' ? <Button>Bongo! {points.bongo}</Button> : <Button onClick={assignBongo}>Bongo!</Button>}
+          </Col>
+        </Row>
+        <Row xs={12}>
+          <Col>
+          {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={nextHole}>Next Hole</Button>}
+          </Col>
+        </Row>
+
+      </Container>
     );
   }
 }

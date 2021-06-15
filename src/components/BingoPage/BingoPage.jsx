@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
-// import { useParams } from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 
 function BingoPage(props) {

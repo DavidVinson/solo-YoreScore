@@ -1,78 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import Table from 'react-bootstrap/Table';
+
 
 function YoreScore(props) {
-    const { gameId } = useParams();
     const history = useHistory();
-    const dispatch = useDispatch();
 
     //game score from score reducer
     const gameScore = useSelector((store) => store.score);
-    // const games = useSelector((store) => store.allgames);
-
-    // useEffect(() => {
-    //     dispatch({
-    //         type: 'FETCH_YORE_SCORE',
-    //         payload: Number(gameId)
-    //     })
-    // }, []); //AJ had idea to use dispatch in the [] 
-
 
     //gameScore: {player1: pts, player2: pts, player3: pts, player4: pts}
     console.log('the game score', gameScore);
-    // console.log('games', games);
-    console.log('game id', gameId);
 
     const [heading, setHeading] = useState('Points Page');
 
-    // function displayPayout(gameScore) {
+    if (gameScore.length === 0) {
+        return (<p>Loading...<button onClick={() => history.push('/game')}>Refresh games</button></p>); //have to refresh page
 
-    // const players = Object.fromEntries(Object.entries(gameScore).map(([key, value]) => [key, value * 2]));
-    // console.log('the players', players);
+    } else {
+        //players are last item in the gameScore array
+        const players = Object.entries(gameScore[gameScore.length - 1]);
+        // console.log('players', players);
 
-    // let score = gameScore.pop();
-    // let firstItem = gameScore.shift();
-    // console.log('first item', firstItem);
-    // let wager = firstItem.wager;
-    // console.log('wager', wager);
-    // const players = Object.fromEntries(Object.entries(score).map(([key, value]) => [key, value * wager]));
-
-    // return (
-    //     <tr>
-    //         <td>{JSON.stringify(score)}</td>
-    //         <td><button onClick={() => history.push('/home')}>Home</button></td>
-
-    //     </tr>
-    // );
-    // }
-
-
-    if (!gameScore) return (<p>Loading...</p>); //have to refresh page
-
-    else {
-
-        //players is the last item in the gameScore
-        //constains the tallied point count
-
-        const players = Object.keys(gameScore[gameScore.length - 1]);
-        const justPlayers = players.slice(0, 4);
-        // const players = Object.entries(gameScore[gameScore.length - 1]);
-
-        console.log('keys', players);
-        console.log('just players', justPlayers);
-        // console.log('wager', players[players.length - 1]);
+        //wager is the last item in the players array
+        const wager = players.pop();
+        // console.log('wager', wager);
 
         return (
-
             <>
-                <h2>YoreScore for game {gameId}</h2>
-                <table>
+                <h2>YoreScore!</h2>
+                <Table>
                     <thead>
                         <tr>
                             <th>Player</th>
                             <th>Points</th>
+                            <th></th>
                             <th>Wager</th>
                             <th>Payout</th>
                         </tr>
@@ -80,14 +43,18 @@ function YoreScore(props) {
                     <tbody>
                         {players.map((player) =>
                             <tr>
-                                <td>{player}</td>
+                                <td>{player[0]}</td>
+                                <td>{player[1]}</td>
+                                <td>x</td>
+                                <td>{wager[1]}</td>
+                                <td>${player[1] * wager[1]}</td>
                             </tr>
                         )}
                     </tbody>
 
-                </table>
+                </Table>
                 <hr />
-                <table>
+                <Table>
                     <thead>
                         <tr>
                             <th>Hole</th>
@@ -105,12 +72,11 @@ function YoreScore(props) {
                                 <td>{game.bongo}</td>
                             </tr>)}
                     </tbody>
-                </table>
+                </Table>
             </>
         );
-
     }
-
 }
+
 
 export default YoreScore;
