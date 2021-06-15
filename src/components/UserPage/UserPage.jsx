@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector, useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 function UserPage() {
@@ -19,25 +23,50 @@ function UserPage() {
 
   if (myGames.length > 0) {
     return (
-      <div className="container">
-        <h2>Welcome, {user.username}!</h2>
-        {/* <p>Your ID is: {user.id}</p> */}
-        <LogOutButton className="btn" />
-        <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
-        <Button onClick={() => history.push('/roundPage')}>Continue Game</Button>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <h2>Welcome, {user.username}!</h2>
+            {/* <p>Your ID is: {user.id}</p> */}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
+            <Button onClick={() => history.push('/roundPage')}>Continue Game</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <LogOutButton className="btn" />
+          </Col>
+        </Row>
+
+      </Container>
 
     );
   }
 
   else {
     return (
-      <div className="container">
-        <h2>Welcome, {user.username}!</h2>
+      <Container>
+        <Row>
+          <Col>
+          <h2>Welcome, {user.username}!</h2>
         {/* <p>Your ID is: {user.id}</p> */}
-        <LogOutButton className="btn" />
-        <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
-      </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <LogOutButton className="btn" />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
