@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 
 import './YoreGames.css';
+import { Form } from 'react-bootstrap';
 
 
 function YoreGames(props) {
@@ -52,10 +53,10 @@ function YoreGames(props) {
 
 
     return (
-        <Container>
-            <Row id="row-image">
+        <>
+            <Row id="row-image-games">
                 <Col>
-                    {/* <h2>{heading}</h2> */}
+
                     <center>
                         <Image src="https://i.imgur.com/RQDkfWOt.jpg" />
                     </center>
@@ -63,6 +64,7 @@ function YoreGames(props) {
             </Row>
             <Row>
                 <Col>
+                    <h3>{heading}</h3>
                     <Table responsive="sm" striped bordered hover variant="dark" size="sm">
                         <thead>
                             <tr>
@@ -89,7 +91,7 @@ function YoreGames(props) {
 
                 </Col>
             </Row>
-        </Container>
+        </>
     );
 }
 

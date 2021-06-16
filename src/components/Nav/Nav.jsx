@@ -20,7 +20,6 @@ function Nav() {
   }
 
   return (
-    <Container className="container">
     <div className="nav">
       <Link to="/home">
         <h2 className="nav-title">Yore Score!</h2>
@@ -48,7 +47,7 @@ function Nav() {
           </>
         )}
         <Link className="navLink" to="/rules">
-          Game Rules
+          Rules
         </Link>
 
         {/* <Link className="navLink" to="/about">
@@ -56,7 +55,6 @@ function Nav() {
         </Link> */}
       </div>
     </div>
-    </Container>
   );
 }
 

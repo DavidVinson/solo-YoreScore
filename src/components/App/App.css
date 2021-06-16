@@ -38,7 +38,7 @@ Container
 Nav
 -------------------------------------------------------------------------------- */
 .nav-container {
-  background-color: #A3C9A8;
+  background-color: #343A40;
 
 }
 
@@ -99,7 +99,7 @@ Button
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #6A8D73;
+  border-color: #A3C9A8;
   color: #f8f8f8;
 }
 

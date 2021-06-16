@@ -31,6 +31,8 @@ import BongoPage from '../BongoPage/BongoPage.jsx';
 import YoreGames from '../YoreGames/YoreGames.jsx';
 import YoreScore from '../YoreScore/YoreScore.jsx';
 import './App.css';
+import Container from 'react-bootstrap/Container';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -40,8 +42,9 @@ function App() {
   }, [dispatch]);
 
   return (
+    //put one Container here!
+    <Container>
     <Router>
-      <div>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -154,8 +157,8 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
     </Router>
+    </Container>
   );
 }
 

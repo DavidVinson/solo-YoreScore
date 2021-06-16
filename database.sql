@@ -43,7 +43,7 @@ CREATE TABLE "game" (
   OIDS=FALSE
 );
 
-ALTER TABLE "round" ADD CONSTRAINT "round_game_id_fk" FOREIGN KEY ("game_id") REFERENCES "game"("id");
+ALTER TABLE "round" ADD CONSTRAINT "round_game_id_fk" FOREIGN KEY ("game_id") REFERENCES "game"("id") ON DELETE CASCADE;
 
-ALTER TABLE "game" ADD CONSTRAINT "game_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "user"("id");
+ALTER TABLE "game" ADD CONSTRAINT "game_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE;
 
