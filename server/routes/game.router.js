@@ -58,10 +58,11 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
     //this gets all the games in the db and is used by game Saga FETCH_ALL_GAMES
     const sqlText = `
     SELECT "game"."id" AS "gameId", "user"."id" AS "userId", "user"."username",
-    "game"."course", "game"."wager", "game"."end_time"
+    "game"."course", "game"."wager", "game"."game_status", "game"."end_time"
     FROM "game"
     JOIN "user" ON ("game"."user_id" = "user"."id")
-    WHERE "user_id" = $1 AND "game"."game_status" = 2;`;
+    WHERE "user_id" = $1 AND "game"."game_status" = 2
+    ORDER BY "game"."end_time" DESC;`;
     pool.query(sqlText, [req.user.id]).then((response) => {
         res.send(response.rows);
     }).catch((error) => {
@@ -94,7 +95,7 @@ router.get('/score/:id', rejectUnauthenticated, (req, res) => {
     //this gets single game from db by auth user who created the game
     console.log('the score body', req.params.id);
     const sqlText = `
-    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "game"."wager",
+    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "game"."wager", "game"."game_status",
     "round"."id" AS "round_id", "round"."game_id", "round"."hole_number",
     "round"."bingo", "round"."bango", "round"."bongo" 
     FROM "round"

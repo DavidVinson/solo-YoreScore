@@ -140,13 +140,13 @@ function App() {
             <YoreGames />
           </Route>
 
-          {/* <Route path="/admin">
-            <AdminPage />
-          </Route> */}
-
           <Route path="/rules">
             <RulesPage />
           </Route>
+
+          {/* <Route path="/admin">
+            <AdminPage />
+          </Route> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

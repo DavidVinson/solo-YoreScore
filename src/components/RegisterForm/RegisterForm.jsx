@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
@@ -24,8 +27,9 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
+    <Container>
     <Form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <h4>Register User</h4>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -61,6 +65,7 @@ function RegisterForm() {
         <Button className="btn" type="submit" name="submit" value="Register">Submit</Button>
     
     </Form>
+    </Container>
   );
 }
 

@@ -6,30 +6,29 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
 
   const user = useSelector((store) => store.user);
   const myGames = useSelector((store) => store.game);
-  console.log('My Games on user page', myGames);
+  // console.log('My Games on user page', myGames);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch({type: 'FETCH_GAME_ROUND'})
-  // }, [])
 
   if (myGames.length > 0) {
     return (
       <Container>
-        <center>
+        <center className="formPanel">
           <Row>
             <Col>
               <h2>Hey, {user.username}!</h2>
               {/* <p>Your ID is: {user.id}</p> */}
             </Col>
           </Row>
+          <br/>
           <Row>
             <Col>
 
@@ -38,6 +37,8 @@ function UserPage() {
 
             </Col>
           </Row>
+          <br/>
+          <br/>
           <Row>
             <Col>
               <LogOutButton className="btn" />
@@ -51,18 +52,21 @@ function UserPage() {
   else {
     return (
       <Container>
-        <center>
+        <center className="formPanel">
           <Row>
             <Col>
               <h2>Welcome, {user.username}!</h2>
               {/* <p>Your ID is: {user.id}</p> */}
             </Col>
           </Row>
+          <br/>
           <Row>
             <Col>
               <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
             </Col>
           </Row>
+          <br/>
+          <br/>
           <Row>
             <Col>
               <LogOutButton className="btn" />

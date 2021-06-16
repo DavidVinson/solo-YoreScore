@@ -52,11 +52,15 @@ function* startGame(action) {
 
   function* endGame(action) {
     console.log('what is the action', action.payload);
+    console.log('looking for game id', action.payload.game_id);
+    const gameId = action.payload.game_id;
     try {
       //updates game table to end game status
       yield axios.put('/api/game/end', action.payload);
       //CLEAR_POINT clears points from point reducer
       yield put({ type: 'CLEAR_POINT' });
+      yield put({type: 'FETCH_ALL_GAMES'});
+      yield put({type: 'FETCH_YORE_SCORE', payload: gameId});
 
     } catch (error) {
       console.log('End game request failed', error);

@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
+import Spinner from 'react-bootstrap/Spinner';
+import swal from 'sweetalert';
+
 
 function BingoPage(props) {
 
     const game = useSelector((store) => store.game);
     const [heading, setHeading] = useState('Bingo Page');
 
-    // console.log(game);
-    // console.log(game[0].player1);
-    // console.log(game[0].player2);
-    // console.log(game[0].player3);
-    // console.log(game[0].player4);
-
     const history = useHistory();
     const dispatch = useDispatch();
 
     function alertClicked(player) {
-        alert(`You clicked ${player}`);
+        swal("Bingo!", `Nice shot ${player}!`, "success", {
+            button: "Aww yiss!",
+          });
 
         console.log(`${player} awarded Bingo!`);
 
@@ -33,25 +33,38 @@ function BingoPage(props) {
 
     }
 
+    if (game.length === 0) {
+        return (
+            <center>
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            </center>
+        );
+    }
+
 
     return (
-        <div>
+        <center>
             <h2>{heading}</h2>
             <ListGroup>
-                <ListGroup.Item action onClick={() => alertClicked(game[0].player1)}>
+                <ListGroup.Item variant="success" onClick={() => alertClicked(game[0].player1)}>
                     Player1: {game[0].player1}
                 </ListGroup.Item>
-                <ListGroup.Item action onClick={() => alertClicked(game[0].player2)}>
+                <br/>
+                <ListGroup.Item variant="success" onClick={() => alertClicked(game[0].player2)}>
                     Player2: {game[0].player2}
                 </ListGroup.Item>
-                <ListGroup.Item action onClick={() => alertClicked(game[0].player3)}>
+                <br/>
+                <ListGroup.Item variant="success" onClick={() => alertClicked(game[0].player3)}>
                     Player3: {game[0].player3}
                 </ListGroup.Item>
-                <ListGroup.Item action onClick={() => alertClicked(game[0].player4)}>
+                <br/>
+                <ListGroup.Item variant="success" onClick={() => alertClicked(game[0].player4)}>
                     Player4: {game[0].player4}
                 </ListGroup.Item>
             </ListGroup>
-        </div>
+        </center>
     );
 }
 

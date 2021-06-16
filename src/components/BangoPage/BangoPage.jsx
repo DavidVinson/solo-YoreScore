@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
 // import { useParams } from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
+
 
 function BangoPage(props) {
 
@@ -20,7 +22,9 @@ function BangoPage(props) {
     const dispatch = useDispatch();
 
     function alertClicked(player) {
-        alert(`You clicked ${player}`);
+        swal("Bango!", `No gimmies, ${player}!`, "success", {
+            button: "Putter, please!",
+          });
 
         console.log(`${player} awarded Bango!`);
 
@@ -37,23 +41,26 @@ function BangoPage(props) {
 
 
     return (
-        <div>
+        <center>
             <h2>{heading}</h2>
             <ListGroup>
                 <ListGroup.Item action onClick={() => alertClicked(game[0].player1)}>
                     Player1: {game[0].player1}
                 </ListGroup.Item>
+                <br/>
                 <ListGroup.Item action onClick={() => alertClicked(game[0].player2)}>
                     Player2: {game[0].player2}
                 </ListGroup.Item>
+                <br/>
                 <ListGroup.Item action onClick={() => alertClicked(game[0].player3)}>
                     Player3: {game[0].player3}
                 </ListGroup.Item>
+                <br/>
                 <ListGroup.Item action onClick={() => alertClicked(game[0].player4)}>
                     Player4: {game[0].player4}
                 </ListGroup.Item>
             </ListGroup>
-        </div>
+        </center>
     );
 }
 

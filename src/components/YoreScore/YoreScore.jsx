@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 
 function YoreScore(props) {
@@ -9,14 +10,22 @@ function YoreScore(props) {
 
     //game score from score reducer
     const gameScore = useSelector((store) => store.score);
+    const allGames = useSelector((store) => store.allgames);
 
     //gameScore: {player1: pts, player2: pts, player3: pts, player4: pts}
     console.log('the game score', gameScore);
+    // console.log('the latest game', allGames[0].gameId);
+    // console.log('the latest game status', allGames[0].game_status);
 
     const [heading, setHeading] = useState('Points Page');
+    const continueGame = () => history.push('/roundPage');
 
     if (gameScore.length === 0) {
-        return (<p>Loading...<button onClick={() => history.push('/game')}>Refresh games</button></p>); //have to refresh page
+        return (
+            <center>
+                <p>Loading...<button onClick={() => history.push('/game')}>Refresh games</button></p>
+            </center>
+        ); //have to refresh page
 
     } else {
         //players are last item in the gameScore array
@@ -30,6 +39,7 @@ function YoreScore(props) {
         return (
             <>
                 <h2>YoreScore!</h2>
+                {gameScore[0].game_status === 1 && <Button onClick={continueGame}>Continue Game</Button>}
                 <Table>
                     <thead>
                         <tr>

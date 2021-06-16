@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+
 
 
 // CUSTOM COMPONENTS
@@ -20,30 +22,39 @@ function LandingPage() {
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <h2>{heading}</h2></Col>
-      </Row>
-      <Row>
-        <Col>
-          <p>Yore Score tracks the points awarded for each player during a game of Bingo, Bango, Bongo.
-            Point totals and payouts made easy! Never forget who won with Yore Score!</p>
-        </Col>
-      </Row>
+      <center>
+        <Row>
+          <Col>
+
+            <Image src="#" roundedCircle />
+
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h3>Track points and get rewarded!</h3>
+          </Col>
+        </Row>
+      </center>
+
       <Row>
         <Col>
           <RegisterForm />
           <center>
-          <h4>Already a Member?</h4>
-          <Button size="sm" onClick={onLogin}>
-            Login
+            <h4>Already a Member?</h4>
+            <Button size="sm" onClick={onLogin}>
+              Login
           </Button>
           </center>
         </Col>
       </Row>
-
+      {/* <Row>
+        <Col>
+          <h3>{heading}</h3></Col>
+      </Row> */}
     </Container>
   );
+
 
 
 }

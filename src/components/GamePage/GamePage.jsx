@@ -3,6 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import { useHistory } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+
 
 function GamePage() {
     const player1 = useSelector(store => store.user.username);
@@ -57,121 +61,136 @@ function GamePage() {
 
 
     return (
-        <form className="formPanel" onSubmit={startGame}>
-            <h2>New Game</h2>
-            <div>
-                <Form.Group controlId="course">
-                <Form.Label>
-                    Course:
-                        <Form.Control
-                        type="text"
-                        name="course"
-                        required
-                        value={course}
-                        onChange={(event) => setCourse(event.target.value)}
-                    />
-                </Form.Label>
-                </Form.Group>
-            </div>
-            <div>
-                <Form.Group controlId="wager">
-                <Form.Label>
-                    Wager:
-                        <Form.Control
-                        type="number"
-                        name="wager"
-                        required
-                        value={wager}
-                        onChange={(event) => setWager(event.target.value)}
-                    />
-                </Form.Label>
-                </Form.Group>
-            </div>
+        <Container>
+            <div className="formPanel">
+                <Form onSubmit={startGame}>
+                    <h2>New Game</h2>
+                    <Form.Row>
+                        <Col xs={8}>
+                            <Form.Group controlId="course">
+                                <Form.Label>
+                                    Golf Course:
+                                 <Form.Control placeholder="Golf Course"
+                                        type="text"
+                                        name="course"
+                                        required
+                                        value={course}
+                                        onChange={(event) => setCourse(event.target.value)}
+                                    />
+                                </Form.Label>
+                            </Form.Group>
+                        </Col>
+                        <Col xs={4}>
+                            <Form.Group controlId="wager">
+                                <Form.Label>
+                                    Wager:
+                                <Form.Control
+                                        type="number"
+                                        name="wager"
+                                        required
+                                        value={wager}
+                                        onChange={(event) => setWager(event.target.value)}
+                                    />
+                                </Form.Label>
+                            </Form.Group>
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Playing the front or back nine?</Form.Label>
+                                <Form.Check
+                                    type="radio"
+                                    label="Front-nine"
+                                    name="radio-btn"
+                                    id="radio1"
+                                    value={isFrontNine}
+                                    onChange={() => setIsFrontNine(true)}
+                                />
 
-            <div>
-                <Form.Group>
-                    <Form.Label>Playing the front or back nine?</Form.Label>
-                    <Form.Check
-                        type="radio"
-                        label="front-nine"
-                        name="radio-btn"
-                        id="radio1"
-                        value={isFrontNine}
-                        onChange={() => setIsFrontNine(true)}
-                    />
+                                <Form.Check
+                                    type="radio"
+                                    label="Back-nine"
+                                    name="radio-btn"
+                                    id="radio2"
+                                    value={isFrontNine}
+                                    onChange={() => setIsFrontNine(false)}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        <Col>
+                            <Form.Group controlId="player1">
+                                <Form.Label>
+                                    Player 1: Logged in
+                                <Form.Control
+                                        type="text"
+                                        name="player1"
+                                        required
+                                        value={player1}
+                                        readOnly
+                                    />
+                                </Form.Label>
+                            </Form.Group>
 
-                    <Form.Check
-                        type="radio"
-                        label="back-nine"
-                        name="radio-btn"
-                        id="radio2"
-                        value={isFrontNine}
-                        onChange={() => setIsFrontNine(false)}
-                    />
-                </Form.Group>
-            </div>
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        <Col>
+                            <Form.Group controlId="player2">
+                                <Form.Label>
+                                    Player 2:
+                                <Form.Control
+                                        type="text"
+                                        name="player2"
+                                        value={player2}
+                                        onChange={(event) => setPlayer2(event.target.value)}
+                                    />
+                                </Form.Label>
+                            </Form.Group>
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        <Col>
+                            <Form.Group controlId="player3">
+                                <Form.Label>
+                                    Player 3:
+                                <Form.Control
+                                        type="text"
+                                        name="player3"
+                                        value={player3}
+                                        onChange={(event) => setPlayer3(event.target.value)}
+                                    />
+                                </Form.Label>
+                            </Form.Group>
 
-            <div>
-                <Form.Group controlId="player1">
-                <Form.Label>
-                    Player 1:
-                        <Form.Control
-                        type="text"
-                        name="player1"
-                        required
-                        value={player1}
-                        readOnly
-                    />
-                </Form.Label>
-                </Form.Group>
-            </div>
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        <Col>
+                            <Form.Group controlId="player4">
+                                <Form.Label>
+                                    Player 4:
+                                <Form.Control
+                                        type="text"
+                                        name="player4"
+                                        value={player4}
+                                        onChange={(event) => setPlayer4(event.target.value)}
+                                    />
+                                </Form.Label>
+                            </Form.Group>
 
-            <div>
-                <Form.Group controlId="player2">
-                <Form.Label>
-                    Player 2:
-                        <Form.Control
-                        type="text"
-                        name="player2"
-                        value={player2}
-                        onChange={(event) => setPlayer2(event.target.value)}
-                    />
-                </Form.Label>
-                </Form.Group>
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        <Col>
+                            <Button type="submit" name="submit" value="Tee Off">Tee Off</Button>
+                        </Col>
+                    </Form.Row>
+                </Form>
             </div>
-
-            <div>
-                <Form.Group controlId="player3">
-                <Form.Label>
-                    Player 3:
-                        <Form.Control
-                        type="text"
-                        name="player3"
-                        value={player3}
-                        onChange={(event) => setPlayer3(event.target.value)}
-                    />
-                </Form.Label>
-                </Form.Group>
-            </div>
-
-            <div>
-                <Form.Group controlId="player4">
-                <Form.Label>
-                    Player 4:
-                        <Form.Control
-                        type="text"
-                        name="player4"
-                        value={player4}
-                        onChange={(event) => setPlayer4(event.target.value)}
-                    />
-                </Form.Label>
-                </Form.Group>
-            </div>
-
-            <div>
-                <input className="btn" type="submit" name="submit" value="Tee Off" />
-            </div>
-        </form>
+        </Container>
     );
 }
 
