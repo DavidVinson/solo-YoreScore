@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import Container from 'react-bootstrap/Container';
+
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -18,6 +20,7 @@ function Nav() {
   }
 
   return (
+    <Container className="container">
     <div className="nav">
       <Link to="/home">
         <h2 className="nav-title">Yore Score!</h2>
@@ -53,6 +56,7 @@ function Nav() {
         </Link> */}
       </div>
     </div>
+    </Container>
   );
 }
 

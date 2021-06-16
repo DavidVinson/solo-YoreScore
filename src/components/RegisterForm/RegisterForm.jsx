@@ -27,19 +27,20 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
+    
     <Container>
     <Form className="formPanel" onSubmit={registerUser}>
-      <h4>Register User</h4>
+      <h5>Register Player</h5>
       {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
+        <h4 className="alert" role="alert">
           {errors.registrationMessage}
-        </h3>
+        </h4>
       )}
       
         <Form.Group controlId="username">
         <Form.Label>
-        Username:
-        <Form.Control
+        
+        <Form.Control placeholder="username"
             type="text"
             name="username"
             value={username}
@@ -51,8 +52,8 @@ function RegisterForm() {
      
       <Form.Group controlId="password">
         <Form.Label>
-        Password:
-        <Form.Control
+       
+        <Form.Control placeholder="password"
             type="password"
             name="password"
             value={password}
@@ -61,11 +62,13 @@ function RegisterForm() {
             />
         </Form.Label>
         </Form.Group>
-     
+        
         <Button className="btn" type="submit" name="submit" value="Register">Submit</Button>
+       
     
     </Form>
     </Container>
+    
   );
 }
 

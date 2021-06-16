@@ -7,7 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
 import Badge from 'react-bootstrap/Badge';
-import './RoundPage.css';
+import Image from 'react-bootstrap/Image';
+
 
 function RoundPage(props) {
 
@@ -15,7 +16,7 @@ function RoundPage(props) {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_GAME_ROUND'})
+    dispatch({ type: 'FETCH_GAME_ROUND' })
   }, [])
 
   //currentGame will be an array of game rounds
@@ -180,11 +181,11 @@ function RoundPage(props) {
 
   else if (currentGame.current_round === 3) {
     return (
-      <center>
+      <center className="container">
         <Container>
           <Row xs={12}>
             <Col>
-            <h2>Hole <Badge variant="dark">{currentGame.hole_number}</Badge></h2>
+            <h1><Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle /><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
             </Col>
           </Row>
           <br />
@@ -223,10 +224,10 @@ function RoundPage(props) {
   else {
     return (
       <center>
-        <Container fluid>
+        <Container>
           <Row xs={12}>
             <Col>
-              <h2>Hole <Badge variant="dark">{currentGame.hole_number}</Badge></h2>
+              <h1><Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle /><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
             </Col>
           </Row>
           <br />

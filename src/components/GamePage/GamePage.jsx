@@ -64,7 +64,9 @@ function GamePage() {
         <Container>
             <div className="formPanel">
                 <Form onSubmit={startGame}>
+                    <center>
                     <h2>New Game</h2>
+                    </center>
                     <Form.Row>
                         <Col xs={8}>
                             <Form.Group controlId="course">

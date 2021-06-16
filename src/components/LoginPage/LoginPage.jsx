@@ -1,11 +1,16 @@
 import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 function LoginPage() {
   const history = useHistory();
 
   return (
+    <Container>
     <div>
       <LoginForm />
 
@@ -21,6 +26,7 @@ function LoginPage() {
         </button>
       </center>
     </div>
+    </Container>
   );
 }
 

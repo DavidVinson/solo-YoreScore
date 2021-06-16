@@ -3,6 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+
+import './YoreGames.css';
+
 
 function YoreGames(props) {
 
@@ -45,31 +52,44 @@ function YoreGames(props) {
 
 
     return (
-        <div>
-            <h2>{heading}</h2>
-            <Table striped bordered hover size="sm" responsive="sm">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Golf Course</th>
-                        <th>Date/Time</th>
-                    </tr>
-                </thead>
+        <Container>
+            <Row id="row-image">
+                <Col>
+                    {/* <h2>{heading}</h2> */}
+                    <center>
+                        <Image src="https://i.imgur.com/RQDkfWOt.jpg" />
+                    </center>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Table responsive="sm" striped bordered hover variant="dark" size="sm">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Golf Course</th>
+                                <th>Date/Time</th>
+                            </tr>
+                        </thead>
 
-                <tbody>
-                    {allGames && allGames.map((game) =>
-                        <tr key={game.gameId}>
-                            <td>{game.username}</td>
-                            <td>{game.course}</td>
-                            <td>{game.end_time}</td>
-                            <td><Button size="sm" onClick={() => getScores(game.gameId)}>YoreScore!</Button></td>
-                            <td><Button size="sm" onClick={() => deleteGame(game.gameId)}>Delete</Button></td>
+                        <tbody>
+                            {allGames && allGames.map((game) =>
+                                <tr key={game.gameId}>
+                                    <td>{game.username}</td>
+                                    <td>{game.course}</td>
+                                    <td>{game.end_time}</td>
+                                    <td><Button size="sm" onClick={() => getScores(game.gameId)}>YoreScore!</Button></td>
+                                    <td><img onClick={() => deleteGame(game.gameId)} className="trashcan" src="./whitetrashcan-npbg.png" alt="trashcan" width="32" height="32" /></td>
+                                    {/* <td><Button size="sm" onClick={() => deleteGame(game.gameId)}>Delete</Button></td> */}
 
-                        </tr>)}
+                                </tr>)}
 
-                </tbody>
-            </Table>
-        </div>
+                        </tbody>
+                    </Table>
+
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

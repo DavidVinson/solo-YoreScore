@@ -48,19 +48,19 @@ function BingoPage(props) {
         <center>
             <h2>{heading}</h2>
             <ListGroup>
-                <ListGroup.Item variant="success" onClick={() => alertClicked(game[0].player1)}>
+                <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player1)}>
                     Player1: {game[0].player1}
                 </ListGroup.Item>
                 <br/>
-                <ListGroup.Item variant="success" onClick={() => alertClicked(game[0].player2)}>
+                <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player2)}>
                     Player2: {game[0].player2}
                 </ListGroup.Item>
                 <br/>
-                <ListGroup.Item variant="success" onClick={() => alertClicked(game[0].player3)}>
+                <ListGroup.Item  variant="light" action hover onClick={() => alertClicked(game[0].player3)}>
                     Player3: {game[0].player3}
                 </ListGroup.Item>
                 <br/>
-                <ListGroup.Item variant="success" onClick={() => alertClicked(game[0].player4)}>
+                <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player4)}>
                     Player4: {game[0].player4}
                 </ListGroup.Item>
             </ListGroup>

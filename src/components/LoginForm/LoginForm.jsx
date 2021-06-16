@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -25,41 +31,44 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+    <center>
+    <Container className="formPanel">
+    <Form onSubmit={login}>
+      <h5>Login</h5>
       {errors.loginMessage && (
-        <h3 className="alert" role="alert">
+        <h4 className="alert" role="alert">
           {errors.loginMessage}
-        </h3>
+        </h4>
       )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
+        <Form.Group>
+          <Form.Label>
+            <Form.Control placeholder="username"
             type="text"
             name="username"
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
+            />
+        </Form.Label>
+        </Form.Group>
+      
+        <Form.Group>
+          <Form.Label>
+            <Form.Control placeholder="password" 
             type="password"
             name="password"
             required
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
-    </form>
+            />
+        </Form.Label>
+        </Form.Group>
+     
+      <Button className="btn" type="submit" name="submit" value="Log In">Submit</Button>
+
+    </Form>
+    </Container>
+    </center>
   );
 }
 

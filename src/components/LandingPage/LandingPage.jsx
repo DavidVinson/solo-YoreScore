@@ -21,38 +21,36 @@ function LandingPage() {
   };
 
   return (
-    <Container>
-      <center>
+    <center>
+      <Container className="container">
+
         <Row>
           <Col>
 
-            <Image src="#" roundedCircle />
-
+            <Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle />
           </Col>
         </Row>
+        <br/>
+        <Row className="tag-line">
+          <Col>
+            <h5>Track points and get rewarded!</h5>
+          </Col>
+        </Row>
+
         <Row>
           <Col>
-            <h3>Track points and get rewarded!</h3>
-          </Col>
-        </Row>
-      </center>
-
-      <Row>
-        <Col>
-          <RegisterForm />
-          <center>
-            <h4>Already a Member?</h4>
-            <Button size="sm" onClick={onLogin}>
-              Login
+            <RegisterForm />
+            <div className="formPanel">
+              <h5>Already a Member?</h5>
+              <Button className="btn_sizeMin" size="sm" onClick={onLogin}>
+                Login
           </Button>
-          </center>
-        </Col>
-      </Row>
-      {/* <Row>
-        <Col>
-          <h3>{heading}</h3></Col>
-      </Row> */}
-    </Container>
+            </div>
+
+          </Col>
+        </Row>
+      </Container>
+    </center>
   );
 
 

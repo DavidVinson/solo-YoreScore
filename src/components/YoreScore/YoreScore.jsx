@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 
 
 function YoreScore(props) {
@@ -38,14 +39,16 @@ function YoreScore(props) {
 
         return (
             <>
-                <h2>YoreScore!</h2>
+                {/* <h2>YoreScore!</h2> */}
+                <center>
+                <Image src="https://i.imgur.com/WUNkB5It.jpg" rounded/>
+                </center>
                 {gameScore[0].game_status === 1 && <Button onClick={continueGame}>Continue Game</Button>}
-                <Table>
+                <Table responsive striped bordered hover variant="dark" size="sm">
                     <thead>
                         <tr>
                             <th>Player</th>
                             <th>Points</th>
-                            <th></th>
                             <th>Wager</th>
                             <th>Payout</th>
                         </tr>
@@ -55,7 +58,6 @@ function YoreScore(props) {
                             <tr>
                                 <td>{player[0]}</td>
                                 <td>{player[1]}</td>
-                                <td>x</td>
                                 <td>{wager[1]}</td>
                                 <td>${player[1] * wager[1]}</td>
                             </tr>
@@ -64,7 +66,8 @@ function YoreScore(props) {
 
                 </Table>
                 <hr />
-                <Table>
+                <h3>Points</h3>
+                <Table responsive striped bordered hover variant="dark" size="sm">
                     <thead>
                         <tr>
                             <th>Hole</th>
