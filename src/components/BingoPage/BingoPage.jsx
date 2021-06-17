@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useHistory } from 'react-router-dom';
-import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
+import Badge from 'react-bootstrap/Badge';
 import swal from 'sweetalert';
 
 
 function BingoPage(props) {
 
     const game = useSelector((store) => store.game);
-    const [heading, setHeading] = useState('Bingo Page');
+    const [heading, setHeading] = useState('Bingo');
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -46,7 +46,7 @@ function BingoPage(props) {
 
     return (
         <center>
-            <h2>{heading}</h2>
+            <h2><Badge variant="dark">{heading}</Badge></h2>
             <ListGroup>
                 <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player1)}>
                     Player1: {game[0].player1}

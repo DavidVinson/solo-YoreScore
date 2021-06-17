@@ -181,42 +181,32 @@ function RoundPage(props) {
 
   else if (currentGame.current_round === 3) {
     return (
-      <center className="container">
-        <Container>
+      <center>
           <Row xs={12}>
             <Col>
             <h1><Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle /><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
             </Col>
           </Row>
-          <br />
-          <br />
           <Row xs={12}>
             <Col>
               {points.bingo !== '' ? <h3><Badge variant="success">Bingo! {points.bingo}</Badge></h3> : <Button onClick={assignBingo}>Bingo!</Button>}
             </Col>
           </Row>
-          <br />
-          <br />
           <Row xs={12}>
             <Col>
               {points.bango !== '' ? <h3><Badge variant="success">Bango! {points.bango}</Badge></h3> : <Button onClick={assignBango}>Bango!</Button>}
             </Col>
           </Row>
-          <br />
-          <br />
           <Row xs={12}>
             <Col>
               {points.bongo !== '' ? <h3><Badge variant="success">Bongo! {points.bongo}</Badge></h3> : <Button onClick={assignBongo}>Bongo!</Button>}
             </Col>
           </Row>
-          <br />
-          <br />
           <Row xs={12}>
             <Col>
               {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={gameOver}>Game Over</Button>}
             </Col>
           </Row>
-        </Container>
       </center>
     );
   }
@@ -224,42 +214,31 @@ function RoundPage(props) {
   else {
     return (
       <center>
-        <Container>
           <Row xs={12}>
             <Col>
               <h1><Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle /><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
             </Col>
           </Row>
-          <br />
-          <br />
           <Row xs={12}>
             <Col>
               {points.bingo !== '' ? <h3><Badge variant="success">Bingo! {points.bingo}</Badge></h3> : <Button onClick={assignBingo}>Bingo!</Button>}
             </Col>
           </Row>
-          <br />
-          <br />
           <Row xs={12}>
             <Col>
               {points.bango !== '' ? <h3><Badge variant="success">Bango! {points.bango}</Badge></h3> : <Button onClick={assignBango}>Bango!</Button>}
             </Col>
           </Row>
-          <br />
-          <br />
           <Row xs={12}>
             <Col>
               {points.bongo !== '' ? <h3><Badge variant="success">Bongo! {points.bongo}</Badge></h3> : <Button onClick={assignBongo}>Bongo!</Button>}
             </Col>
           </Row>
-          <br />
-          <br />
           <Row xs={12}>
             <Col>
-              {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={nextHole}>Next Hole</Button>}
+              {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={nextHole}>Ok</Button>}
             </Col>
           </Row>
-
-        </Container>
       </center>
     );
   }

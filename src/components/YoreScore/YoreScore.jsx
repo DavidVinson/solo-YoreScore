@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
+import Badge from 'react-bootstrap/Badge';
+import moment from 'moment';
+
 import './YoreScore.css';
 
 
@@ -15,7 +17,6 @@ function YoreScore(props) {
 
     //game score from score reducer
     const gameScore = useSelector((store) => store.score);
-    const allGames = useSelector((store) => store.allgames);
 
     //gameScore: {player1: pts, player2: pts, player3: pts, player4: pts}
     console.log('the game score', gameScore);
@@ -43,7 +44,7 @@ function YoreScore(props) {
 
         return (
             <>
-                <Container>
+                
                     <Row id="row-image-score">
                         <Col>
 
@@ -55,8 +56,9 @@ function YoreScore(props) {
                     </Row>
                     <Row>
                         <Col>
-                            <h3>Yore Score!</h3>
-                            {gameScore[0].game_status === 1 && <Button onClick={continueGame}>Continue Game</Button>}
+                            <h3><Badge variant="dark">{gameScore[0].course} {moment(gameScore[0].start_time).format('l')}</Badge></h3>
+
+                            {gameScore[0].game_status === 1 && <Button onClick={continueGame}>Next Hole</Button>}
                             <Table responsive="sm" striped bordered hover variant="dark" size="sm">
                                 <thead>
                                     <tr>
@@ -83,7 +85,8 @@ function YoreScore(props) {
                     </Row>
                     <Row>
                         <Col>
-                            <h3>Points</h3>
+                        <h3><Badge variant="dark">Points {moment(gameScore[0].start_time).format('l')}</Badge></h3>
+
                             <Table responsive="sm" striped bordered hover variant="dark" size="sm">
                                 <thead>
                                     <tr>
@@ -105,7 +108,7 @@ function YoreScore(props) {
                             </Table>
                         </Col>
                     </Row>
-                </Container>
+                
             </>
         );
     }

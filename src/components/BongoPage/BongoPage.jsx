@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
 // import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import Badge from 'react-bootstrap/Badge';
 import swal from 'sweetalert';
 
 
 function BongoPage(props) {
 
     const game = useSelector((store) => store.game);
-    const [heading, setHeading] = useState('Bongo Page');
+    const [heading, setHeading] = useState('Bongo');
     // setHeading(`${point} Point Assign page`);
 
     // console.log(game);
@@ -42,7 +43,7 @@ function BongoPage(props) {
 
     return (
         <center>
-            <h2>{heading}</h2>
+            <h2><Badge variant="dark">{heading}</Badge></h2>
             <ListGroup>
                 <ListGroup.Item action onClick={() => alertClicked(game[0].player1)}>
                     Player1: {game[0].player1}

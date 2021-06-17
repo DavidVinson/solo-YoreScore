@@ -1,1 +1,9 @@
 
+.row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.button {
+    padding-bottom: 5px;
+}

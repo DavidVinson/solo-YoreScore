@@ -7,8 +7,8 @@ import React from 'react';
 
 function RulesPage() {
     return (
-        <div className="container container-rules">
-            <div>
+        <>
+            <div className="container container-rules">
                 <h3>The Big Picture</h3>
                     <p>Bingo Bango Bongo is a game in which three points are up for grabs on every hole. Each point corresponds to the completion of a different activity. The first golfer to complete each activity earns a point, and at the end of the round, points are added up and cash is divided based on point totals (groups will generally play $1 per point).</p>
                 <h3>Scoring</h3>
@@ -21,7 +21,7 @@ function RulesPage() {
 
                     Etiquette becomes increasingly important on par-3s, when golfers can theoretically earn both the “bingo” and “bongo” points before the remaining players in the group have teed off.</p>
             </div>
-        </div>
+        </>
     );
 }
 

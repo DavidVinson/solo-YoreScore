@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Badge from 'react-bootstrap/Badge';
 import Image from 'react-bootstrap/Image';
 
 function UserPage() {
@@ -20,16 +21,15 @@ function UserPage() {
 
   if (myGames.length > 0) {
     return (
-      <Container>
-        <center className="formPanel">
-          <Row>
+      <>
+        <center>
+          <Row className="start">
             <Col>
               <h2>Hey, {user.username}!</h2>
               {/* <p>Your ID is: {user.id}</p> */}
             </Col>
           </Row>
-          <br/>
-          <Row>
+          <Row className="start">
             <Col>
 
               <h4>{myGames[0].course}...in progress</h4>
@@ -37,44 +37,38 @@ function UserPage() {
 
             </Col>
           </Row>
-          <br/>
-          <br/>
-          <Row>
+          <Row className="start">
             <Col>
               <LogOutButton className="btn" />
             </Col>
           </Row>
         </center>
-      </Container>
+      </>
     );
   }
 
   else {
     return (
-      <Container>
-        <center className="formPanel">
-          <Row>
+      <>
+        <center>
+          <Row className="start">
             <Col>
               <h2>Welcome, {user.username}!</h2>
-              {/* <p>Your ID is: {user.id}</p> */}
+              <p></p>
             </Col>
           </Row>
-          <br/>
-          <Row>
+          <Row className="start">
             <Col>
               <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
             </Col>
           </Row>
-          <br/>
-          <br/>
-          <Row>
+          <Row className="start">
             <Col>
               <LogOutButton className="btn" />
             </Col>
           </Row>
-
         </center>
-      </Container>
+      </>
     );
   }
 }

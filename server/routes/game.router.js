@@ -95,7 +95,8 @@ router.get('/score/:id', rejectUnauthenticated, (req, res) => {
     //this gets single game from db by auth user who created the game
     console.log('the score body', req.params.id);
     const sqlText = `
-    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "game"."wager", "game"."game_status",
+    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4",
+    "game"."course", "game"."wager", "game"."game_status", "game"."start_time",
     "round"."id" AS "round_id", "round"."game_id", "round"."hole_number",
     "round"."bingo", "round"."bango", "round"."bongo" 
     FROM "round"

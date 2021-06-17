@@ -22,7 +22,6 @@ function LandingPage() {
 
   return (
     <center>
-      <Container className="container">
 
         <Row>
           <Col>
@@ -30,7 +29,6 @@ function LandingPage() {
             <Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle />
           </Col>
         </Row>
-        <br/>
         <Row className="tag-line">
           <Col>
             <h5>Track points and get rewarded!</h5>
@@ -44,12 +42,11 @@ function LandingPage() {
               <h5>Already a Member?</h5>
               <Button className="btn_sizeMin" size="sm" onClick={onLogin}>
                 Login
-          </Button>
+              </Button>
             </div>
 
           </Col>
         </Row>
-      </Container>
     </center>
   );
 

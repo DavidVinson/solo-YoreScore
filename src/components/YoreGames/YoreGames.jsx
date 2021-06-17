@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
+import Badge from 'react-bootstrap/Badge';
+import moment from 'moment';
 
 import './YoreGames.css';
-import { Form } from 'react-bootstrap';
 
 
 function YoreGames(props) {
@@ -56,7 +55,6 @@ function YoreGames(props) {
         <>
             <Row id="row-image-games">
                 <Col>
-
                     <center>
                         <Image src="https://i.imgur.com/RQDkfWOt.jpg" />
                     </center>
@@ -64,31 +62,22 @@ function YoreGames(props) {
             </Row>
             <Row>
                 <Col>
-                    <h3>{heading}</h3>
+                    <h3><Badge variant="dark">{heading}</Badge></h3>
                     <Table responsive="sm" striped bordered hover variant="dark" size="sm">
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Golf Course</th>
-                                <th>Date/Time</th>
+                                <th>Course</th>
+                                <th></th>
                             </tr>
                         </thead>
-
                         <tbody>
                             {allGames && allGames.map((game) =>
                                 <tr key={game.gameId}>
-                                    <td>{game.username}</td>
-                                    <td>{game.course}</td>
-                                    <td>{game.end_time}</td>
-                                    <td><Button size="sm" onClick={() => getScores(game.gameId)}>YoreScore!</Button></td>
+                                    <td onClick={() => getScores(game.gameId)}>{game.course} {moment(game.end_time).format('l')}</td>
                                     <td><img onClick={() => deleteGame(game.gameId)} className="trashcan" src="./whitetrashcan-npbg.png" alt="trashcan" width="32" height="32" /></td>
-                                    {/* <td><Button size="sm" onClick={() => deleteGame(game.gameId)}>Delete</Button></td> */}
-
                                 </tr>)}
-
                         </tbody>
                     </Table>
-
                 </Col>
             </Row>
         </>

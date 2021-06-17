@@ -25,13 +25,31 @@ Container
 }
 
 /* --------------------------------------------------------------------------------
-Container
+Container Rules page
 -------------------------------------------------------------------------------- */
 
 .container-rules {
   padding: 20px;
   background-color: #6A8D73;
   color: #f8f8f8;
+}
+
+/* --------------------------------------------------------------------------------
+Container Row
+-------------------------------------------------------------------------------- */
+
+.row {
+  padding-top: 5px;
+}
+
+.row h2 {
+  color: #f8f8f8;
+}
+
+.row-start {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
 }
 
 /* --------------------------------------------------------------------------------
@@ -43,7 +61,7 @@ Nav
 }
 
 /* --------------------------------------------------------------------------------
-Row
+Row tag line
 -------------------------------------------------------------------------------- */
 .tag-line {
   color: #f8f8f8;
@@ -99,7 +117,7 @@ Button
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #A3C9A8;
+  border-color: #343A40;
   color: #f8f8f8;
 }
 
@@ -135,7 +153,12 @@ Form Treatment
   color: #f8f8f8;
 }
 
+.form {
+  background-color: #6A8D73;
+}
+
+
 input {
   margin: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }

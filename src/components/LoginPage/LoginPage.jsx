@@ -10,8 +10,7 @@ function LoginPage() {
   const history = useHistory();
 
   return (
-    <Container>
-    <div>
+    <>
       <LoginForm />
 
       <center>
@@ -25,8 +24,7 @@ function LoginPage() {
           Register
         </button>
       </center>
-    </div>
-    </Container>
+    </>
   );
 }
 

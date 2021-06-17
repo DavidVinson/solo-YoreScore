@@ -27,9 +27,7 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    
-    <Container>
-    <Form className="formPanel" onSubmit={registerUser}>
+    <Form onSubmit={registerUser}>
       <h5>Register Player</h5>
       {errors.registrationMessage && (
         <h4 className="alert" role="alert">
@@ -63,56 +61,11 @@ function RegisterForm() {
         </Form.Label>
         </Form.Group>
         
-        <Button className="btn" type="submit" name="submit" value="Register">Submit</Button>
-       
-    
+        <Button className="btn" type="submit" name="submit" value="Register">Submit</Button> 
     </Form>
-    </Container>
     
   );
 }
 
 export default RegisterForm;
 
-/*
-THE ORIGINAL FORM FROM TEMPLATE
-  return (
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
-  );
-}
-
-*/
