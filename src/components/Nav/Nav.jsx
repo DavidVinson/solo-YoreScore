@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
-import Container from 'react-bootstrap/Container';
 
 
 function Nav() {

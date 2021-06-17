@@ -85,7 +85,7 @@ function YoreScore(props) {
                     </Row>
                     <Row>
                         <Col>
-                        <h3><Badge variant="dark">Points {moment(gameScore[0].start_time).format('l')}</Badge></h3>
+                        <h3><Badge variant="dark">Points</Badge></h3>
 
                             <Table responsive="sm" striped bordered hover variant="dark" size="sm">
                                 <thead>
@@ -116,3 +116,9 @@ function YoreScore(props) {
 
 
 export default YoreScore;
+
+/*
+
+<h3><Badge variant="dark">Points {moment(gameScore[0].start_time).format('l')}</Badge></h3>
+
+*/

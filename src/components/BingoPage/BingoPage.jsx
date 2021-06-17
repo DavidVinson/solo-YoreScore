@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import Badge from 'react-bootstrap/Badge';
 import swal from 'sweetalert';
+import './BingoPage.css';
 
 
 function BingoPage(props) {
@@ -51,15 +52,15 @@ function BingoPage(props) {
                 <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player1)}>
                     Player1: {game[0].player1}
                 </ListGroup.Item>
-                <br/>
+                
                 <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player2)}>
                     Player2: {game[0].player2}
                 </ListGroup.Item>
-                <br/>
+                
                 <ListGroup.Item  variant="light" action hover onClick={() => alertClicked(game[0].player3)}>
                     Player3: {game[0].player3}
                 </ListGroup.Item>
-                <br/>
+                
                 <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player4)}>
                     Player4: {game[0].player4}
                 </ListGroup.Item>

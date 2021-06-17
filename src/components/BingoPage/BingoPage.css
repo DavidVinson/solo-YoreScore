@@ -1,0 +1,7 @@
+.list-group-item:first-child {
+  margin-bottom: 20px;
+}
+
+.list-group-item+.list-group-item {
+    margin-bottom: 20px;
+  }

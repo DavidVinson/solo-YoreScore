@@ -32,6 +32,8 @@ import YoreGames from '../YoreGames/YoreGames.jsx';
 import YoreScore from '../YoreScore/YoreScore.jsx';
 import './App.css';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
 
 
 function App() {
@@ -44,7 +46,7 @@ function App() {
   return (
     //put one Container here!
     <Container>
-    <Router>
+      <Router>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -114,7 +116,7 @@ function App() {
           >
             <LandingPage />
           </ProtectedRoute>
-          
+
           <Route path="/gamePage">
             <GamePage />
           </Route>
@@ -156,8 +158,9 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        
         <Footer />
-    </Router>
+      </Router>
     </Container>
   );
 }

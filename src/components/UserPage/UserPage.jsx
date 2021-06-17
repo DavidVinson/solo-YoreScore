@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 import Image from 'react-bootstrap/Image';
+import './UserPage.css';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -26,7 +26,6 @@ function UserPage() {
           <Row className="start">
             <Col>
               <h2>Hey, {user.username}!</h2>
-              {/* <p>Your ID is: {user.id}</p> */}
             </Col>
           </Row>
           <Row className="start">

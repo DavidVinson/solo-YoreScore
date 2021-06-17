@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import { useHistory } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
@@ -61,7 +60,7 @@ function GamePage() {
 
 
     return (
-        <Container>
+        <>
             <div className="formPanel">
                 <Form onSubmit={startGame}>
                     <center>
@@ -192,7 +191,7 @@ function GamePage() {
                     </Form.Row>
                 </Form>
             </div>
-        </Container>
+        </>
     );
 }
 

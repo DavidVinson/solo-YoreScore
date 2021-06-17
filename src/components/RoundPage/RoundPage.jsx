@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -184,7 +183,8 @@ function RoundPage(props) {
       <center>
           <Row xs={12}>
             <Col>
-            <h1><Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle /><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
+            <Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle />
+            <h1><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
             </Col>
           </Row>
           <Row xs={12}>
@@ -216,7 +216,8 @@ function RoundPage(props) {
       <center>
           <Row xs={12}>
             <Col>
-              <h1><Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle /><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
+              <Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle />
+              <h1><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
             </Col>
           </Row>
           <Row xs={12}>
