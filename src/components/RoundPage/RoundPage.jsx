@@ -218,7 +218,7 @@ function RoundPage(props) {
           <Row xs={12}>
             <Col>
               <Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle />
-              <h1><Badge variant="dark">{currentGame.hole_number}</Badge></h1>
+              <h1><Badge variant="dark">Hole {currentGame.hole_number}</Badge></h1>
             </Col>
           </Row>
           <Row xs={12}>

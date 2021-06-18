@@ -18,7 +18,7 @@ function YoreGames(props) {
     const user = useSelector((store) => store.user);
     // console.log('all games on YoreGames page', allGames);
 
-    const [heading, setHeading] = useState('Yore Games');
+    const [heading, setHeading] = useState('Game Summary');
 
     const dispatch = useDispatch();
     const history = useHistory();
