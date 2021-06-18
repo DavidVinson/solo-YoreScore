@@ -25,8 +25,8 @@ function GamePage() {
         event.preventDefault();
         console.log('form submitted');
 
-        //clear the score reducer
-        dispatch({ type: 'CLEAR_SCORE' });
+        // //clear the score reducer
+        // dispatch({ type: 'CLEAR_SCORE' });
 
         dispatch({
             //game saga 
@@ -55,9 +55,10 @@ function GamePage() {
         setPlayer3('player3');
         setPlayer4('player4');
 
+        //MOVED to the game saga in the the start game function
         //Go and get the new game
         //the game saga activate
-        dispatch({ type: 'FETCH_GAME_ROUND' });
+        // dispatch({ type: 'FETCH_GAME_ROUND' });
 
         //send user to round page begin
         history.push('/roundPage');

@@ -25,7 +25,7 @@ function YoreScore(props) {
     const [heading, setHeading] = useState('Points Page');
     const continueGame = () => history.push('/roundPage');
     const goHome = () => {
-        dispatch({type: 'CLEAR_SCORE'});
+        dispatch({type: 'RESET_GAME'});
         history.push('/home');
     }
 

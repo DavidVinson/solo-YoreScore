@@ -5,16 +5,14 @@ import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Badge from 'react-bootstrap/Badge';
-import Image from 'react-bootstrap/Image';
-import './UserPage.css';
+
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+
 
   const user = useSelector((store) => store.user);
   const myGames = useSelector((store) => store.game);
-  // console.log('My Games on user page', myGames);
+  console.log('My Games on user page', myGames);
   const history = useHistory();
   const dispatch = useDispatch();
 

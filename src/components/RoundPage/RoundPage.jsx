@@ -76,15 +76,16 @@ function RoundPage(props) {
 
     dispatch({
       //axios PUT to api/round to the round saga
-      //updates current hold with player points
+      //updates current hole with player points
       type: 'SEND_POINTS',
       payload: pointObj
     })
-    dispatch({
-      //no axios call. dispatch to point saga
-      // to clear redux point store (bingo, bango, bongo points)
-      type: 'CLEAR_POINTS_STORE'
-    })
+    //MOVED this operation to be handled with the SEND_POINTS dispatch
+    // dispatch({
+    //   //no axios call. dispatch to point saga
+    //   // to clear redux point store (bingo, bango, bongo points)
+    //   type: 'CLEAR_POINTS_STORE'
+    // })
     dispatch({
       //axios PUT to api/game to the game saga
       //updates current round in game table by 1
@@ -141,11 +142,11 @@ function RoundPage(props) {
       payload: pointObj
     })
 
-    dispatch({
-      //no axios call. dispatch to point saga
-      // to clear redux point store (bingo, bango, bongo points)
-      type: 'CLEAR_POINTS_STORE'
-    })
+    // dispatch({
+    //   //no axios call. dispatch to point saga
+    //   // to clear redux point store (bingo, bango, bongo points)
+    //   type: 'CLEAR_POINT'
+    // })
 
     dispatch({
       //axios PUT to api/game/end

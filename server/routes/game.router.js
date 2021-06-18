@@ -84,6 +84,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     WHERE "user_id" = $1 AND "game"."game_status" = 1
     ORDER BY "round"."hole_number";`;
     pool.query(sqlText, [req.user.id]).then((response) => {
+        console.log('FETCH_GAME_ROUND stuff', response.rows);
         res.send(response.rows);
     }).catch((error) => {
         console.log('GET req problems on server', error);

@@ -6,7 +6,12 @@ import axios from 'axios';
 
 function* sendPoints(action) {
     try {
+        console.log('POST player points to db', action.payload);
         yield axios.put('/api/round', action.payload);
+
+        //CLEAR_POINT clears bingo, bango, bongo points from point reducer
+        //gets ready for next round (hole)
+        yield put({type: 'CLEAR_POINT'});
 
     } catch (error) {
         console.log('Send points post request failed', error);
