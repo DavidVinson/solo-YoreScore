@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +13,7 @@ import './YoreScore.css';
 
 
 function YoreScore(props) {
+    const dispatch = useDispatch();
     const history = useHistory();
 
     //game score from score reducer
@@ -20,11 +21,14 @@ function YoreScore(props) {
 
     //gameScore: {player1: pts, player2: pts, player3: pts, player4: pts}
     console.log('the game score', gameScore);
-    // console.log('the latest game', allGames[0].gameId);
-    // console.log('the latest game status', allGames[0].game_status);
 
     const [heading, setHeading] = useState('Points Page');
     const continueGame = () => history.push('/roundPage');
+    const goHome = () => {
+        dispatch({type: 'CLEAR_SCORE'});
+        history.push('/home');
+    }
+
 
     if (gameScore.length === 0) {
         return (
@@ -36,7 +40,7 @@ function YoreScore(props) {
     } else {
         //players are last item in the gameScore array
         const players = Object.entries(gameScore[gameScore.length - 1]);
-        // console.log('players', players);
+        console.log('players', players);
 
         //wager is the last item in the players array
         const wager = players.pop();
@@ -44,71 +48,71 @@ function YoreScore(props) {
 
         return (
             <>
-                
-                    <Row id="row-image-score">
-                        <Col>
 
-                            <center>
-                                <Image src="https://i.imgur.com/WUNkB5It.jpg" rounded />
-                            </center>
+                <Row id="row-image-score">
+                    <Col>
 
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h3><Badge variant="dark">{gameScore[0].course} {moment(gameScore[0].start_time).format('l')}</Badge></h3>
+                        <center>
+                            <Image src="https://i.imgur.com/WUNkB5It.jpg" rounded />
+                        </center>
 
-                            {gameScore[0].game_status === 1 && <Button onClick={continueGame}>Next Hole</Button>}
-                            <Table responsive="sm" striped bordered hover variant="dark" size="sm">
-                                <thead>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3><Badge variant="dark">{gameScore[0].course} {moment(gameScore[0].start_time).format('l')}</Badge></h3>
+
+                        {gameScore[0].game_status < 2 ? <Button onClick={continueGame}>Next Hole</Button> : <Button onClick={goHome}>Home</Button>}
+                        <Table responsive="sm" striped bordered hover variant="dark" size="sm">
+                            <thead>
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Points</th>
+                                    <th>Wager</th>
+                                    <th>Payout</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {players.map((player) =>
                                     <tr>
-                                        <th>Player</th>
-                                        <th>Points</th>
-                                        <th>Wager</th>
-                                        <th>Payout</th>
+                                        <td>{player[0] !== null && player[0]}</td>
+                                        <td>{player[1]}</td>
+                                        <td>{wager[1]}</td>
+                                        <td>${player[1] * wager[1]}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {players.map((player) =>
-                                        <tr>
-                                            <td>{player[0]}</td>
-                                            <td>{player[1]}</td>
-                                            <td>{wager[1]}</td>
-                                            <td>${player[1] * wager[1]}</td>
-                                        </tr>
-                                    )}
-                                </tbody>
+                                )}
+                            </tbody>
 
-                            </Table>
+                        </Table>
 
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
                         <h3><Badge variant="dark">Points</Badge></h3>
 
-                            <Table responsive="sm" striped bordered hover variant="dark" size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>Hole</th>
-                                        <th>Bingo</th>
-                                        <th>Bango</th>
-                                        <th>Bongo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {gameScore.map((game) =>
-                                        <tr key={game.round_id}>
-                                            <td>{game.hole_number}</td>
-                                            <td>{game.bingo}</td>
-                                            <td>{game.bango}</td>
-                                            <td>{game.bongo}</td>
-                                        </tr>)}
-                                </tbody>
-                            </Table>
-                        </Col>
-                    </Row>
-                
+                        <Table responsive="sm" striped bordered hover variant="dark" size="sm">
+                            <thead>
+                                <tr>
+                                    <th>Hole</th>
+                                    <th>Bingo</th>
+                                    <th>Bango</th>
+                                    <th>Bongo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {gameScore.map((game) =>
+                                    <tr key={game.round_id}>
+                                        <td>{game.hole_number}</td>
+                                        <td>{game.bingo}</td>
+                                        <td>{game.bango}</td>
+                                        <td>{game.bongo}</td>
+                                    </tr>)}
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
+
             </>
         );
     }

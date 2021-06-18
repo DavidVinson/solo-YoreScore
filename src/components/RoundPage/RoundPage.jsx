@@ -72,7 +72,7 @@ function RoundPage(props) {
       bongo: points.bongo
     }
 
-    // console.log('point obj', pointObj);
+    console.log('point obj', pointObj);
 
     dispatch({
       //axios PUT to api/round to the round saga

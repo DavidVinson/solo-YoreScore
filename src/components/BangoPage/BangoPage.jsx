@@ -31,6 +31,9 @@ function BangoPage(props) {
 
         history.push('/roundPage');
 
+        console.log('Bango player', player);
+
+
     }
 
 

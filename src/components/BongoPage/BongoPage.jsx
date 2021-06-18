@@ -4,7 +4,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { useHistory } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
 import swal from 'sweetalert';
-import './BongoPage.css';
 
 
 function BongoPage(props) {
@@ -30,6 +29,9 @@ function BongoPage(props) {
         })
 
         history.push('/roundPage');
+
+        console.log('Bongo player', player);
+
 
     }
 

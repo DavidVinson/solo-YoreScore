@@ -16,6 +16,12 @@ function BingoPage(props) {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    // console.log('player1', game[0].player1);
+    // console.log('player2', game[0].player2);
+    // console.log('player3', game[0].player3);
+    // console.log('player4', game[0].player4);
+
+
     function alertClicked(player) {
         swal("Bingo!", `Nice shot ${player}!`, "success", {
             button: "Aww yiss!",
@@ -31,6 +37,8 @@ function BingoPage(props) {
         })
 
         history.push('/roundPage');
+
+        console.log('Bingo player', player);
 
     }
 
@@ -49,19 +57,19 @@ function BingoPage(props) {
         <center>
             <h2><Badge variant="dark">{heading}</Badge></h2>
             <ListGroup>
-                <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player1)}>
+                <ListGroup.Item variant="light" action onClick={() => alertClicked(game[0].player1)}>
                     Player1: {game[0].player1}
                 </ListGroup.Item>
                 
-                <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player2)}>
+                <ListGroup.Item variant="light" action onClick={() => alertClicked(game[0].player2)}>
                     Player2: {game[0].player2}
                 </ListGroup.Item>
                 
-                <ListGroup.Item  variant="light" action hover onClick={() => alertClicked(game[0].player3)}>
+                <ListGroup.Item  variant="light" action onClick={() => alertClicked(game[0].player3)}>
                     Player3: {game[0].player3}
                 </ListGroup.Item>
                 
-                <ListGroup.Item variant="light" action hover onClick={() => alertClicked(game[0].player4)}>
+                <ListGroup.Item variant="light" action onClick={() => alertClicked(game[0].player4)}>
                     Player4: {game[0].player4}
                 </ListGroup.Item>
             </ListGroup>

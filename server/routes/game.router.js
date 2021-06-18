@@ -7,26 +7,28 @@ function cleanUp(arr) {
     let wager = arr[0].wager;
     let scores = [];
     let res = {};
+    let newArray = arr.filter((v) => v.bingo !== null && v.bango !== null && v.bongo !== null);
+    console.log('my newArray', newArray);
 
     //count bingo point for each player
-    arr.forEach(function(v) {
+    newArray.forEach(function(v) {
         res[v.bingo] = (res[v.bingo] || 0) + 1;
     })
 
     //count bango point for each player
-    arr.forEach(function(v) {
+    newArray.forEach(function(v) {
         res[v.bango] = (res[v.bango] || 0) + 1;
     })
 
     //count bongo point for each player
-    arr.forEach(function(v) {
+    newArray.forEach(function(v) {
         res[v.bongo] = (res[v.bongo] || 0) + 1;
     })
     res['wager'] = wager;
     scores.push(res);
+    
     // console.log('wager', wager);
-    // console.log(res);
-    // console.log(points);
+    console.log(res);
     return scores;
 
 }
@@ -106,10 +108,10 @@ router.get('/score/:id', rejectUnauthenticated, (req, res) => {
     ORDER BY "round"."hole_number";`;
     pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
         let gameData = response.rows;
-        // console.log('game data', gameData);
+        console.log('game data', gameData);
         //gamePoints is an object {"dave": 5, "mike": 6, "joe": 8}
         let gameScore = cleanUp(gameData);
-        // console.log('the score', gameScore);
+        console.log('the score', gameScore);
         const scores = [...gameData, ...gameScore];
         // console.log('db game data', scores);
         res.send(scores);
