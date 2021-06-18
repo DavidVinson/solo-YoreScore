@@ -42,10 +42,10 @@ function GamePage() {
             },
         });
 
-        console.log('Player1', player1);
-        console.log('Player2', player2);
-        console.log('Player3', player3);
-        console.log('Player4', player4);
+        // console.log('Player1', player1);
+        // console.log('Player2', player2);
+        // console.log('Player3', player3);
+        // console.log('Player4', player4);
 
         //reset fields
         setCourse('');
