@@ -1,7 +1,10 @@
 .list-group-item:first-child {
   margin-bottom: 20px;
+  /* background-color: #A3C9A8; */
+
 }
 
 .list-group-item+.list-group-item {
     margin-bottom: 20px;
+    /* background-color: #A3C9A8; */
   }

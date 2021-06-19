@@ -24,10 +24,10 @@ function YoreScore(props) {
 
     const [heading, setHeading] = useState('Points Page');
     const continueGame = () => history.push('/roundPage');
-    const goHome = () => {
-        dispatch({type: 'RESET_GAME'});
-        history.push('/home');
-    }
+    // const newGame = () => {
+    //     dispatch({type: 'RESET_GAME'});
+    //     history.push('/home');
+    // }
 
 
     if (gameScore.length === 0) {
@@ -53,7 +53,7 @@ function YoreScore(props) {
                     <Col>
 
                         <center>
-                            <Image src="https://i.imgur.com/WUNkB5It.jpg" rounded />
+                            <Image src="https://i.imgur.com/WUNkB5It.jpg" />
                         </center>
 
                     </Col>
@@ -61,8 +61,10 @@ function YoreScore(props) {
                 <Row>
                     <Col>
                         <h3><Badge variant="dark">{gameScore[0].course} {moment(gameScore[0].start_time).format('l')}</Badge></h3>
+                        <h3><Badge variant="dark">Game Summary</Badge></h3>
 
-                        {gameScore[0].game_status < 2 ? <Button onClick={continueGame}>Next Hole</Button> : <Button onClick={goHome}>Home</Button>}
+
+                        {gameScore[0].game_status < 2 && <Button onClick={continueGame}>Next Hole</Button>}
                         <Table responsive="sm" striped bordered hover variant="dark" size="sm">
                             <thead>
                                 <tr>
