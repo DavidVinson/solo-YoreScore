@@ -53,7 +53,7 @@ function YoreScore(props) {
                     <Col>
 
                         <center>
-                            <Image src="https://i.imgur.com/WUNkB5It.jpg" />
+                            <Image src="https://i.imgur.com/hnztMc3.png" />
                         </center>
 
                     </Col>
