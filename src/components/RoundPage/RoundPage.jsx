@@ -179,7 +179,7 @@ function RoundPage(props) {
     );
   }
 
-  else if (currentGame.current_round === 3) {
+  else if (currentGame.current_round === 9) {
     return (
       <center>
           <Row xs={12}>
