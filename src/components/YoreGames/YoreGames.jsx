@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import Badge from 'react-bootstrap/Badge';
+import moment from 'moment';
+
+import './YoreGames.css';
+
 
 function YoreGames(props) {
 
@@ -11,7 +18,7 @@ function YoreGames(props) {
     const user = useSelector((store) => store.user);
     // console.log('all games on YoreGames page', allGames);
 
-    const [heading, setHeading] = useState('Yore Games');
+    const [heading, setHeading] = useState('Courses');
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -45,31 +52,35 @@ function YoreGames(props) {
 
 
     return (
-        <div>
-            <h2>{heading}</h2>
-            <Table striped bordered hover size="sm" responsive="sm">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Golf Course</th>
-                        <th>Date/Time</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {allGames && allGames.map((game) =>
-                        <tr key={game.gameId}>
-                            <td>{game.username}</td>
-                            <td>{game.course}</td>
-                            <td>{game.end_time}</td>
-                            <td><Button size="sm" onClick={() => getScores(game.gameId)}>YoreScore!</Button></td>
-                            <td><Button size="sm" onClick={() => deleteGame(game.gameId)}>Delete</Button></td>
-
-                        </tr>)}
-
-                </tbody>
-            </Table>
-        </div>
+        <>
+            <Row id="row-image-games">
+                <Col>
+                    <center>
+                        <Image src="https://i.imgur.com/RQDkfWOt.jpg" />
+                    </center>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <h3><Badge variant="dark">{heading}</Badge></h3>
+                    <Table responsive="sm" striped bordered hover variant="dark" size="sm">
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {allGames && allGames.map((game) =>
+                                <tr key={game.gameId}>
+                                    <td onClick={() => getScores(game.gameId)}>{game.course} {moment(game.end_time).format('l')}</td>
+                                    <td><img onClick={() => deleteGame(game.gameId)} className="trashcan" src="./whitetrashcan-npbg.png" alt="trashcan" width="32" height="32" /></td>
+                                </tr>)}
+                        </tbody>
+                    </Table>
+                </Col>
+            </Row>
+        </>
     );
 }
 

@@ -5,6 +5,8 @@ This version uses React, Redux, Express, Passport, and PostgreSQL (a full list o
 ```bash
 heroku pg:psql --app yore-score < database.sql
 ```
+Note on how to add an 'ON DELETE' constraint 
+https://stackoverflow.com/questions/10356484/how-to-add-on-delete-cascade-constraints
 
 ## Development Setup Instructions
 

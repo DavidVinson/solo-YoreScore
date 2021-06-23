@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner';
+import Badge from 'react-bootstrap/Badge';
+import Image from 'react-bootstrap/Image';
+
 
 function RoundPage(props) {
 
@@ -64,24 +67,25 @@ function RoundPage(props) {
     let pointObj = {
       game_id: currentGame.game_id,
       hole_number: currentGame.hole_number,
-      bingo: points.bingo, 
+      bingo: points.bingo,
       bango: points.bango,
       bongo: points.bongo
     }
 
-    // console.log('point obj', pointObj);
+    console.log('point obj', pointObj);
 
     dispatch({
       //axios PUT to api/round to the round saga
-      //updates current hold with player points
+      //updates current hole with player points
       type: 'SEND_POINTS',
       payload: pointObj
     })
-    dispatch({
-      //no axios call. dispatch to point saga
-      // to clear redux point store (bingo, bango, bongo points)
-      type: 'CLEAR_POINTS_STORE'
-    })
+    //MOVED this operation to be handled with the SEND_POINTS dispatch
+    // dispatch({
+    //   //no axios call. dispatch to point saga
+    //   // to clear redux point store (bingo, bango, bongo points)
+    //   type: 'CLEAR_POINTS_STORE'
+    // })
     dispatch({
       //axios PUT to api/game to the game saga
       //updates current round in game table by 1
@@ -106,7 +110,13 @@ function RoundPage(props) {
       type: 'FETCH_GAME_ROUND'
     })
 
-    history.push('/roundPage');
+    dispatch({
+      //get the score ready between holes
+      type: 'FETCH_YORE_SCORE',
+      payload: currentGame.game_id
+    })
+
+    history.push('/score');
   }
 
 
@@ -132,11 +142,11 @@ function RoundPage(props) {
       payload: pointObj
     })
 
-    dispatch({
-      //no axios call. dispatch to point saga
-      // to clear redux point store (bingo, bango, bongo points)
-      type: 'CLEAR_POINTS_STORE'
-    })
+    // dispatch({
+    //   //no axios call. dispatch to point saga
+    //   // to clear redux point store (bingo, bango, bongo points)
+    //   type: 'CLEAR_POINT'
+    // })
 
     dispatch({
       //axios PUT to api/game/end
@@ -147,11 +157,11 @@ function RoundPage(props) {
       }
     })
 
-    dispatch({
-      //get the score ready
-      type: 'FETCH_YORE_SCORE',
-      payload: currentGame.game_id 
-    })
+    // dispatch({
+    //   //get the score ready
+    //   type: 'FETCH_YORE_SCORE',
+    //   payload: currentGame.game_id
+    // })
 
     //navigate to YoreScore page
     history.push('/score');
@@ -160,72 +170,78 @@ function RoundPage(props) {
 
   if (currentGame.length === 0) {
     return (
-      <p>Loading...</p>
+      <center>
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </center>
+
     );
   }
 
   else if (currentGame.current_round === 3) {
     return (
-      <Container fluid>
-        <Row xs={12}>
-          <Col>
-          <h2>Hole {currentGame.hole_number}</h2>
-          </Col>
-        </Row>
-        <Row xs={12}>
-          <Col>
-          {points.bingo !== '' ? <Button>Bingo! {points.bingo}</Button> : <Button onClick={assignBingo}>Bingo!</Button>}
-          </Col>
-        </Row>
-        <Row xs={12}>
-          <Col>
-          {points.bango !== '' ? <Button>Bango! {points.bango}</Button> : <Button onClick={assignBango}>Bango!</Button>}
-          </Col>
-        </Row>
-        <Row xs={12}>
-          <Col>
-          {points.bongo !== '' ? <Button>Bongo! {points.bongo}</Button> : <Button onClick={assignBongo}>Bongo!</Button>}
-          </Col>
-        </Row>
-        <Row xs={12}>
-          <Col>
-          {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={gameOver}>Game Over</Button>}
-          </Col>
-        </Row>
-      </Container>
+      <center>
+          <Row xs={12}>
+            <Col>
+            <Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle />
+            <h1><Badge variant="dark">Hole {currentGame.hole_number}</Badge></h1>
+            </Col>
+          </Row>
+          <Row xs={12}>
+            <Col>
+              {points.bingo !== '' ? <h3><Badge variant="success">Bingo! {points.bingo}</Badge></h3> : <Button onClick={assignBingo}>Bingo!</Button>}
+            </Col>
+          </Row>
+          <Row xs={12}>
+            <Col>
+              {points.bango !== '' ? <h3><Badge variant="success">Bango! {points.bango}</Badge></h3> : <Button onClick={assignBango}>Bango!</Button>}
+            </Col>
+          </Row>
+          <Row xs={12}>
+            <Col>
+              {points.bongo !== '' ? <h3><Badge variant="success">Bongo! {points.bongo}</Badge></h3> : <Button onClick={assignBongo}>Bongo!</Button>}
+            </Col>
+          </Row>
+          <Row xs={12}>
+            <Col>
+              {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={gameOver}>Game Over</Button>}
+            </Col>
+          </Row>
+      </center>
     );
   }
 
   else {
     return (
-      <Container fluid>
-        <Row xs={12}>
-          <Col>
-          <h2>Hole {currentGame.hole_number}</h2>
-          </Col>
-        </Row>
-        <Row xs={12}>
-          <Col>
-          {points.bingo !== '' ? <Button>Bingo! {points.bingo}</Button> : <Button onClick={assignBingo}>Bingo!</Button>}
-          </Col>
-        </Row>
-        <Row xs={12}>
-          <Col>
-          {points.bango !== '' ? <Button>Bango! {points.bango}</Button> : <Button onClick={assignBango}>Bango!</Button>}
-          </Col>
-        </Row>
-        <Row xs={12}>
-          <Col>
-          {points.bongo !== '' ? <Button>Bongo! {points.bongo}</Button> : <Button onClick={assignBongo}>Bongo!</Button>}
-          </Col>
-        </Row>
-        <Row xs={12}>
-          <Col>
-          {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={nextHole}>Next Hole</Button>}
-          </Col>
-        </Row>
-
-      </Container>
+      <center>
+          <Row xs={12}>
+            <Col>
+              <Image src="https://i.imgur.com/fUrRsKwt.jpg" roundedCircle />
+              <h1><Badge variant="dark">Hole {currentGame.hole_number}</Badge></h1>
+            </Col>
+          </Row>
+          <Row xs={12}>
+            <Col>
+              {points.bingo !== '' ? <h3><Badge variant="success">Bingo! {points.bingo}</Badge></h3> : <Button onClick={assignBingo}>Bingo!</Button>}
+            </Col>
+          </Row>
+          <Row xs={12}>
+            <Col>
+              {points.bango !== '' ? <h3><Badge variant="success">Bango! {points.bango}</Badge></h3> : <Button onClick={assignBango}>Bango!</Button>}
+            </Col>
+          </Row>
+          <Row xs={12}>
+            <Col>
+              {points.bongo !== '' ? <h3><Badge variant="success">Bongo! {points.bongo}</Badge></h3> : <Button onClick={assignBongo}>Bongo!</Button>}
+            </Col>
+          </Row>
+          <Row xs={12}>
+            <Col>
+              {(points.bingo !== '' && points.bongo !== '' && points.bango !== '') && <Button onClick={nextHole}>Ok</Button>}
+            </Col>
+          </Row>
+      </center>
     );
   }
 }

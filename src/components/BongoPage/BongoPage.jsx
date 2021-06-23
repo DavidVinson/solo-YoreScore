@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
-// import { useParams } from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import Badge from 'react-bootstrap/Badge';
+import swal from 'sweetalert';
+
 
 function BongoPage(props) {
 
     const game = useSelector((store) => store.game);
-    const [heading, setHeading] = useState('Bongo Page');
-    // setHeading(`${point} Point Assign page`);
-
-    // console.log(game);
-    // console.log(game[0].player1);
-    // console.log(game[0].player2);
-    // console.log(game[0].player3);
-    // console.log(game[0].player4);
+    const [heading, setHeading] = useState('Bongo');
 
     const history = useHistory();
     const dispatch = useDispatch();
 
     function alertClicked(player) {
-        alert(`You clicked ${player}`);
+        swal("Bongo!", `${player} sent it home!`, "success", {
+            button: "Onward!",
+          });
 
         console.log(`${player} awarded Bongo!`);
 
@@ -33,12 +30,15 @@ function BongoPage(props) {
 
         history.push('/roundPage');
 
+        console.log('Bongo player', player);
+
+
     }
 
 
     return (
-        <div>
-            <h2>{heading}</h2>
+        <center>
+            <h2><Badge variant="dark">{heading}</Badge></h2>
             <ListGroup>
                 <ListGroup.Item action onClick={() => alertClicked(game[0].player1)}>
                     Player1: {game[0].player1}
@@ -53,7 +53,7 @@ function BongoPage(props) {
                     Player4: {game[0].player4}
                 </ListGroup.Item>
             </ListGroup>
-        </div>
+        </center>
     );
 }
 

@@ -31,6 +31,10 @@ import BongoPage from '../BongoPage/BongoPage.jsx';
 import YoreGames from '../YoreGames/YoreGames.jsx';
 import YoreScore from '../YoreScore/YoreScore.jsx';
 import './App.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -40,8 +44,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
-      <div>
+    //put one Container here!
+    <Container>
+      <Router>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -111,7 +116,7 @@ function App() {
           >
             <LandingPage />
           </ProtectedRoute>
-          
+
           <Route path="/gamePage">
             <GamePage />
           </Route>
@@ -140,22 +145,23 @@ function App() {
             <YoreGames />
           </Route>
 
-          {/* <Route path="/admin">
-            <AdminPage />
-          </Route> */}
-
           <Route path="/rules">
             <RulesPage />
           </Route>
+
+          {/* <Route path="/admin">
+            <AdminPage />
+          </Route> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
         </Switch>
+        
         <Footer />
-      </div>
-    </Router>
+      </Router>
+    </Container>
   );
 }
 

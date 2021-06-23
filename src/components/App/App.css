@@ -5,13 +5,20 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  color: #f8f8f8;
+  text-align: center;
+  /* background-color: #6A8D73; */
+
+
 }
 
 img {
   display: inline-block;
   max-width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -20,7 +27,45 @@ Container
 
 .container {
   padding: 20px;
+  background-color: #6A8D73;
+  /* height: 100%; */
+  min-height: 640px;
+  background-image: url('https://i.imgur.com/vcEDEY6b.jpg'); 
 }
+
+/* --------------------------------------------------------------------------------
+Container Rules page
+-------------------------------------------------------------------------------- */
+
+.container-rules {
+  padding: 20px;
+  background-color: #6A8D73;
+}
+
+/* --------------------------------------------------------------------------------
+Container Row
+-------------------------------------------------------------------------------- */
+
+.row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+.row-start {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+/* --------------------------------------------------------------------------------
+Nav
+-------------------------------------------------------------------------------- */
+.nav-container {
+  background-color: #343A40;
+
+}
+
 
 /* --------------------------------------------------------------------------------
 Button
@@ -29,9 +74,9 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  border-color: #f8f8f8;
   border-width: 1px 1px 3px;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   background-color: #6A8D73; 
   color: #f8f8f8;
   font-size: 1.1rem;
@@ -55,7 +100,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #A3C9A8;
   text-decoration: none;
 }
 
@@ -72,8 +117,8 @@ Button
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #6A8D73;
-  color: #6A8D73;
+  border-color: #343A40;
+  color: #f8f8f8;
 }
 
 /* --------------------------------------------------------------------------------
@@ -97,16 +142,33 @@ Form Treatment
 
 .formPanel {
   box-sizing: border-box;
-  width: 400px;
-  max-width: 100%;
-  padding: 25px;
-  margin: 0 auto 20px;
-  background-color: #efefef;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  width: 300px;
+  /* max-width: 100%; */
+  padding: 15px;
+  margin: 0 auto 15px;
+  /* background-color: #efefef; */
+  /* background-color: #6A8D73; */
+  /* border-radius: 3px; */
+  /* box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4); */
+  /* color: #f8f8f8; */
 }
+
+.form {
+  background-color: #6A8D73;
+}
+
 
 input {
   margin: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
+
+.table-responsive-sm {
+  padding-top: 5px;
+}
+
+.center h2 {
+  margin-top: 150px;
+  margin-bottom: 15px;
+}
+

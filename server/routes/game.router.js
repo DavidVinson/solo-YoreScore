@@ -7,26 +7,28 @@ function cleanUp(arr) {
     let wager = arr[0].wager;
     let scores = [];
     let res = {};
+    let newArray = arr.filter((v) => v.bingo !== null && v.bango !== null && v.bongo !== null);
+    console.log('my newArray', newArray);
 
     //count bingo point for each player
-    arr.forEach(function(v) {
+    newArray.forEach(function(v) {
         res[v.bingo] = (res[v.bingo] || 0) + 1;
     })
 
     //count bango point for each player
-    arr.forEach(function(v) {
+    newArray.forEach(function(v) {
         res[v.bango] = (res[v.bango] || 0) + 1;
     })
 
     //count bongo point for each player
-    arr.forEach(function(v) {
+    newArray.forEach(function(v) {
         res[v.bongo] = (res[v.bongo] || 0) + 1;
     })
     res['wager'] = wager;
     scores.push(res);
+    
     // console.log('wager', wager);
-    // console.log(res);
-    // console.log(points);
+    console.log(res);
     return scores;
 
 }
@@ -58,10 +60,11 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
     //this gets all the games in the db and is used by game Saga FETCH_ALL_GAMES
     const sqlText = `
     SELECT "game"."id" AS "gameId", "user"."id" AS "userId", "user"."username",
-    "game"."course", "game"."wager", "game"."end_time"
+    "game"."course", "game"."wager", "game"."game_status", "game"."end_time"
     FROM "game"
     JOIN "user" ON ("game"."user_id" = "user"."id")
-    WHERE "user_id" = $1 AND "game"."game_status" = 2;`;
+    WHERE "user_id" = $1 AND "game"."game_status" = 2
+    ORDER BY "game"."end_time" DESC;`;
     pool.query(sqlText, [req.user.id]).then((response) => {
         res.send(response.rows);
     }).catch((error) => {
@@ -81,6 +84,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     WHERE "user_id" = $1 AND "game"."game_status" = 1
     ORDER BY "round"."hole_number";`;
     pool.query(sqlText, [req.user.id]).then((response) => {
+        console.log('FETCH_GAME_ROUND stuff', response.rows);
         res.send(response.rows);
     }).catch((error) => {
         console.log('GET req problems on server', error);
@@ -94,7 +98,8 @@ router.get('/score/:id', rejectUnauthenticated, (req, res) => {
     //this gets single game from db by auth user who created the game
     console.log('the score body', req.params.id);
     const sqlText = `
-    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4", "game"."wager",
+    SELECT "game"."player1", "game"."player2", "game"."player3", "game"."player4",
+    "game"."course", "game"."wager", "game"."game_status", "game"."start_time",
     "round"."id" AS "round_id", "round"."game_id", "round"."hole_number",
     "round"."bingo", "round"."bango", "round"."bongo" 
     FROM "round"
@@ -104,10 +109,10 @@ router.get('/score/:id', rejectUnauthenticated, (req, res) => {
     ORDER BY "round"."hole_number";`;
     pool.query(sqlText, [req.user.id, req.params.id]).then((response) => {
         let gameData = response.rows;
-        // console.log('game data', gameData);
+        console.log('game data', gameData);
         //gamePoints is an object {"dave": 5, "mike": 6, "joe": 8}
         let gameScore = cleanUp(gameData);
-        // console.log('the score', gameScore);
+        console.log('the score', gameScore);
         const scores = [...gameData, ...gameScore];
         // console.log('db game data', scores);
         res.send(scores);

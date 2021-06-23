@@ -5,9 +5,10 @@ import axios from 'axios';
 function* startGame(action) {
     try {
       yield axios.post('/api/game/start', action.payload);
-      //after new game started, CLEAR point and score reducers
-      yield put({type: 'CLEAR_POINT'});
-      yield put({type: 'CLEAR_SCORE'});
+      // yield put({type: 'CLEAR_POINT'});
+      // yield put({type: 'CLEAR_SCORE'});
+      // yield put({type: 'RESET_GAME'});
+      yield put({type: 'FETCH_GAME_ROUND'});
 
     } catch (error) {
       console.log('Start Game post request failed', error);
@@ -16,7 +17,7 @@ function* startGame(action) {
 
   function* fetchGameRound() {
     try {
-      //response will be an array of game rounds
+      //response will be an array of game rounds with status of 1
       const response = yield axios.get('/api/game');
       console.log('GET game round from db', response.data);
       //SET_GAME_ROUND in game reducer
@@ -52,11 +53,18 @@ function* startGame(action) {
 
   function* endGame(action) {
     console.log('what is the action', action.payload);
+    console.log('looking for game id', action.payload.game_id);
+    const gameId = action.payload.game_id;
     try {
       //updates game table to end game status
       yield axios.put('/api/game/end', action.payload);
+
+      //end game: CLEAR point and score reducers
       //CLEAR_POINT clears points from point reducer
       yield put({ type: 'CLEAR_POINT' });
+      yield put({type: 'FETCH_ALL_GAMES'});
+      yield put({type: 'FETCH_YORE_SCORE', payload: gameId});
+      yield put({type: 'RESET_GAME'});
 
     } catch (error) {
       console.log('End game request failed', error);

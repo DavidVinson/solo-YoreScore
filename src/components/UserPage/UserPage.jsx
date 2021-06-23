@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector, useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+
 
   const user = useSelector((store) => store.user);
   const myGames = useSelector((store) => store.game);
@@ -13,31 +16,56 @@ function UserPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch({type: 'FETCH_GAME_ROUND'})
-  // }, [])
 
   if (myGames.length > 0) {
     return (
-      <div className="container">
-        <h2>Welcome, {user.username}!</h2>
-        {/* <p>Your ID is: {user.id}</p> */}
-        <LogOutButton className="btn" />
-        <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
-        <Button onClick={() => history.push('/roundPage')}>Continue Game</Button>
-      </div>
+      <>
+        <center>
+          <Row className="start">
+            <Col>
+              <h2>Hey, {user.username}!</h2>
+            </Col>
+          </Row>
+          <Row className="start">
+            <Col>
 
+              <h4>{myGames[0].course}...in progress</h4>
+              <Button onClick={() => history.push('/roundPage')}>Continue Game</Button>
+
+            </Col>
+          </Row>
+          <Row className="start">
+            <Col>
+              <LogOutButton className="btn" />
+            </Col>
+          </Row>
+        </center>
+      </>
     );
   }
 
   else {
     return (
-      <div className="container">
-        <h2>Welcome, {user.username}!</h2>
-        {/* <p>Your ID is: {user.id}</p> */}
-        <LogOutButton className="btn" />
-        <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
-      </div>
+      <>
+        <center>
+          <Row className="start">
+            <Col>
+              <h2>Welcome, {user.username}!</h2>
+              <p></p>
+            </Col>
+          </Row>
+          <Row className="start">
+            <Col>
+              <Button onClick={() => history.push('/gamePage')}>Start New Game</Button>
+            </Col>
+          </Row>
+          <Row className="start">
+            <Col>
+              <LogOutButton className="btn" />
+            </Col>
+          </Row>
+        </center>
+      </>
     );
   }
 }
