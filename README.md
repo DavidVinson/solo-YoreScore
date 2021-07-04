@@ -6,7 +6,7 @@ _Duration: 2 Week Sprint_
 
 YoreScore is a game tracking application based on Bingo, Bango, Bongo, a side-game played within a round of golf. Bingo, Bango, Bongo is a wager game that follows a sequence to award points to players: Bingo, Bango, Bongo, respectively. One game of Bingo, Bango, Bongo is based on nine holes of golf. The app requires one player to register/login and keep score for the foursome. The logged in user will be automatically assigned to Player 1. The logged in user (Player 1) sets up the game, to include whether the game begins on the front nine, or back nine, adding players, and awarding player points. Upon completion of a game, the app will provide a breakdown of each player and his/her respective payout. 
 
-To see the fully functional site, please visit: [Yore-Score](www.heroku.com)
+To see the fully functional site, please visit: [Yore-Score](https://yore-score.herokuapp.com/#/home)
 
 ## Screen Shot
 [Landing Page](https://user-images.githubusercontent.com/44621153/124397318-cfa7f300-dcd4-11eb-9f7c-118f22a95d4b.png)
