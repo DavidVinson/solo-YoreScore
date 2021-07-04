@@ -9,14 +9,11 @@ YoreScore is a game tracking application based on Bingo, Bango, Bongo, a side-ga
 To see the fully functional site, please visit: [Yore-Score](www.heroku.com)
 
 ## Screen Shot
-Landing Page
-[Screen Shot 2021-07-04 at 2 32 56 PM](https://user-images.githubusercontent.com/44621153/124397318-cfa7f300-dcd4-11eb-9f7c-118f22a95d4b.png)
+[Landing Page](https://user-images.githubusercontent.com/44621153/124397318-cfa7f300-dcd4-11eb-9f7c-118f22a95d4b.png)
 
-Bingo, Bango, Bongo game board
-[Screen Shot 2021-07-04 at 2 34 50 PM](https://user-images.githubusercontent.com/44621153/124397422-58bf2a00-dcd5-11eb-9495-652f00f0944f.png)
+[Bingo, Bango, Bongo game board](https://user-images.githubusercontent.com/44621153/124397882-48f51500-dcd8-11eb-86df-45ff0247ff82.png)
 
-List of Previous Games
-[Screen Shot 2021-07-04 at 2 34 50 PM](https://user-images.githubusercontent.com/44621153/124397373-10077100-dcd5-11eb-9f6e-db579f65ebea.png)
+[List of Previous Games](https://user-images.githubusercontent.com/44621153/124397373-10077100-dcd5-11eb-9f6e-db579f65ebea.png)
 
 
 ## Installation
