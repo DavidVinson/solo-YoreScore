@@ -69,21 +69,18 @@ This code is also heavily commented. We recommend reading through the comments, 
 Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
 
 ____________________________________# README TEMPLATE
-# PROJECT NAME
+# Yore Score
 
 ## Description
 
 _Duration: 2 Week Sprint_
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it? 
+YoreScore is a game tracking application based on Bingo, Bango, Bongo, a side-game played within a round of golf. Bingo, Bango, Bongo is a wager game that follows a sequence to award points to players: Bingo, Bango, Bongo, respectively. One game of Bingo, Bango, Bongo is based on nine holes of golf. The app requires one player to register/login and keep score for the foursome. The logged in user will be automatically assigned to Player 1. The logged in user (Player 1) sets up the game, to include whether the game begins on the front nine, or back nine, adding players, and awarding player points. Upon completion of a game, the app will provide a breakdown of each player and his/her respective payout. 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam at massa in faucibus. Etiam volutpat, risus non mollis convallis, velit nisi pulvinar mi, eu faucibus orci nisi eget nibh. Integer a velit pretium, volutpat arcu eleifend, fringilla elit. Cras erat sapien, convallis venenatis tellus vitae, feugiat dictum felis.
-
-Suspendisse euismod volutpat aliquet. Maecenas vulputate mauris in pellentesque facilisis. Phasellus varius malesuada semper. Cras sollicitudin diam mollis maximus aliquam.
-
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+To see the fully functional site, please visit: [Yore-Score](www.heroku.com)
 
 ## Screen Shot
+Screen Shot 2021-07-04 at 2.32.56 PM![Screen Shot 2021-07-04 at 2 32 56 PM](https://user-images.githubusercontent.com/44621153/124397318-cfa7f300-dcd4-11eb-9f7c-118f22a95d4b.png)
 
 Include one or two screen shots of your project here (optional). Remove if unused.
 
