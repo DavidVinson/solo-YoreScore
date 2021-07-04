@@ -1,12 +1,35 @@
-
 # Yore Score
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
-```bash
-heroku pg:psql --app yore-score < database.sql
-```
-Note on how to add an 'ON DELETE' constraint 
-https://stackoverflow.com/questions/10356484/how-to-add-on-delete-cascade-constraints
+## Description
+
+_Duration: 2 Week Sprint_
+
+YoreScore is a game tracking application based on Bingo, Bango, Bongo, a side-game played within a round of golf. Bingo, Bango, Bongo is a wager game that follows a sequence to award points to players: Bingo, Bango, Bongo, respectively. One game of Bingo, Bango, Bongo is based on nine holes of golf. The app requires one player to register/login and keep score for the foursome. The logged in user will be automatically assigned to Player 1. The logged in user (Player 1) sets up the game, to include whether the game begins on the front nine, or back nine, adding players, and awarding player points. Upon completion of a game, the app will provide a breakdown of each player and his/her respective payout. 
+
+To see the fully functional site, please visit: [Yore-Score](www.heroku.com)
+
+## Screen Shot
+Landing Page
+[Screen Shot 2021-07-04 at 2 32 56 PM](https://user-images.githubusercontent.com/44621153/124397318-cfa7f300-dcd4-11eb-9f7c-118f22a95d4b.png)
+
+Bingo, Bango, Bongo game board
+[Screen Shot 2021-07-04 at 2 34 50 PM](https://user-images.githubusercontent.com/44621153/124397422-58bf2a00-dcd5-11eb-9495-652f00f0944f.png)
+
+List of Previous Games
+[Screen Shot 2021-07-04 at 2 34 50 PM](https://user-images.githubusercontent.com/44621153/124397373-10077100-dcd5-11eb-9f6e-db579f65ebea.png)
+
+
+## Installation
+
+The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries
+
+1. Create a database named `your database name`
+2. The queries in the `tables.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly.
+3. Open up your editor of choice and run an `npm install`
+4. Run `npm run server` in your terminal
+5. Run `npm run client` in your terminal
+6. The `npm run client` command will open up a new browser tab for you!
+
 
 ## Development Setup Instructions
 
@@ -21,22 +44,6 @@ https://stackoverflow.com/questions/10356484/how-to-add-on-delete-cascade-constr
 - Run `npm run client`
 - Navigate to `localhost:3000`
 
-
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
 ## Production Build
 
 Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
@@ -45,14 +52,12 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 - Run `npm start`
 - Navigate to `localhost:5000`
 
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
+## Connects database to Heroku
+```bash
+heroku pg:psql --app yore-score < database.sql
+```
+Note on how to add an 'ON DELETE' constraint 
+https://stackoverflow.com/questions/10356484/how-to-add-on-delete-cascade-constraints
 
 ## Deployment
 
@@ -64,59 +69,12 @@ This code is also heavily commented. We recommend reading through the comments, 
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
 1. In the deploy section, select manual deploy
 
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
-
-____________________________________# README TEMPLATE
-# Yore Score
-
-## Description
-
-_Duration: 2 Week Sprint_
-
-YoreScore is a game tracking application based on Bingo, Bango, Bongo, a side-game played within a round of golf. Bingo, Bango, Bongo is a wager game that follows a sequence to award points to players: Bingo, Bango, Bongo, respectively. One game of Bingo, Bango, Bongo is based on nine holes of golf. The app requires one player to register/login and keep score for the foursome. The logged in user will be automatically assigned to Player 1. The logged in user (Player 1) sets up the game, to include whether the game begins on the front nine, or back nine, adding players, and awarding player points. Upon completion of a game, the app will provide a breakdown of each player and his/her respective payout. 
-
-To see the fully functional site, please visit: [Yore-Score](www.heroku.com)
-
-## Screen Shot
-[Screen Shot 2021-07-04 at 2 32 56 PM](https://user-images.githubusercontent.com/44621153/124397318-cfa7f300-dcd4-11eb-9f7c-118f22a95d4b.png)
-
-
-### Prerequisites
-
-Link to software that is required to install the app (e.g. node).
+## Built With
+This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
 - [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
-
-## Installation
-
-How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
-
-If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
-
-1. Create a database named `your database name`,
-2. The queries in the `tables.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
-3. Open up your editor of choice and run an `npm install`
-4. Run `npm run server` in your terminal
-5. Run `npm run client` in your terminal
-6. The `npm run client` command will open up a new browser tab for you!
-
-## Usage
-How does someone use this application? Tell a user story here.
-
-1. xxx
-2. xxx
-3. xxx
-4. xxx
-5. xxx
-6. xxx
-
-
-## Built With
-
-List technologies and frameworks here
+- [React.js] (https://reactjs.org/)
+- [Postgresql] (https://www.postgresql.org/)
 
 ## Acknowledgement
 Thanks to [Emerging Digital Academy](https://www.emergingacademy.org/) who equipped and helped me to make this application a reality.
