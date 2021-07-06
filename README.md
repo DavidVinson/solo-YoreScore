@@ -70,8 +70,8 @@ https://stackoverflow.com/questions/10356484/how-to-add-on-delete-cascade-constr
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
 - [Node.js](https://nodejs.org/en/)
-- [React.js] (https://reactjs.org/)
-- [Postgresql] (https://www.postgresql.org/)
+- [React.js](https://reactjs.org/)
+- [Postgresql](https://www.postgresql.org/)
 
 ## Acknowledgement
 Thanks to [Emerging Digital Academy](https://www.emergingacademy.org/) who equipped and helped me to make this application a reality.
